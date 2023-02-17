@@ -1,21 +1,7 @@
 import axios from "./axios"
-import { getToken, getUserInfo, isService, getLocalLang } from "utils"
-import { error as NotifyErrorShow } from "../common/notify"
-import nookies from 'nookies'
-import In18 from "@in18/i18nText"
-import { cacheConfig, createCache, getCache } from "./httpDataCache"
-
 
 axios.interceptors.request.use(
   config => {
-    let token = getToken();
-    let lang = getLocalLang();
-    if (token) {
-      config.headers.authorization = token
-    }
-    if (lang) {
-      config.headers["languageCode"] = lang
-    }
     return config;
   },
   err => {
@@ -24,51 +10,12 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    if (response.status == 200) {
-      if (!response.data.success) {
-        if (response.headers["content-type"].match("application/json")) {
-          let message = In18.T(response.data.code);
-          let notFound = "id未配置-" + response.data.code;
-          NotifyErrorShow({
-            message: message == notFound ? response.data.msg : message
-          })
-        }
-      } else {
-        let URL = response.config.url
-        if (URL) {
-          if (cacheConfig[URL]) {
-            createCache(URL, response.data)
-          }
-        }
-      }
 
-    }
-    if (response.data.code == 401) {
-      response["data"] = {
-        code: 401,
-        data: [],
-        msg: response.data.msg,
-        success: false,
-      }
-
-      if (!isService()) {
-        window.localStorage.removeItem("userInfo");
-        window.localStorage.removeItem("token");
-        nookies.destroy(null, "userInfo", {
-          path: "/",
-        })
-        window.location.href = "/login"
-      }
-
-    }
     return response;
   },
   error => {
     console.error("error", error)
     //  JSON.stringify(error)
-    NotifyErrorShow({
-      message: In18.T("00000"),
-    })
     return Promise.reject({
       code: 500,
       data: [],
@@ -90,14 +37,6 @@ type AxiosModel = {
 
 
 export function fetch(model: AxiosModel, config: any = {}) {
-  let cacheData = getCache(model.url);
-  if (cacheData) {
-    return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
-      resolve(cacheData)
-    }).catch((err) => {
-      return err;
-    })
-  }
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
     axios.get(model.url, {
       params: model.data,
@@ -116,14 +55,6 @@ export function fetch(model: AxiosModel, config: any = {}) {
 
 
 export function post(model: AxiosModel, config: any = {}) {
-  let cacheData = getCache(model.url);
-  if (cacheData) {
-    return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
-      resolve(cacheData)
-    }).catch((err) => {
-      return err;
-    })
-  }
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
     axios.post(model.url, model.data, config)
       .then((response) => {
