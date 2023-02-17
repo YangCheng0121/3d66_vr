@@ -31,11 +31,6 @@ type AxiosModel = {
   data?: any,
 }
 
-
-
-
-
-
 export function fetch(model: AxiosModel, config: any = {}) {
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
     axios.get(model.url, {
