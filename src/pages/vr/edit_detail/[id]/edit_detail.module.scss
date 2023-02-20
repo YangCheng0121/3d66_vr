@@ -2,6 +2,7 @@
   position: fixed;
   right: 20px;
   top: 5%;
+  list-style: none;
 
   &_item {
     width: 111px;
@@ -10,10 +11,6 @@
     margin: 10px 0;
     text-align: center;
     position: relative;
-
-    &:hover {
-      background: #19b955;
-    }
   }
 
   &_label {
@@ -26,6 +23,10 @@
     transition: all .2s ease-in-out;
     user-select: none;
     color: #fff;
+
+    &:hover {
+      background: #19b955;
+    }
   }
 }
 
