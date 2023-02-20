@@ -1,4 +1,12 @@
 import styles from './edit_detail.module.scss'
+import dynamic from "next/dynamic";
+
+const KrpanoExample = dynamic(
+  () => {
+    return import('./KrpanoExample');
+  },
+  { ssr: false },
+);
 
 const RightBar = () => {
   return (
@@ -13,6 +21,7 @@ const RightBar = () => {
 function Index() {
   return (
     <>
+      <KrpanoExample/>
       <RightBar/>
       <h1>我是VR详情</h1>
     </>

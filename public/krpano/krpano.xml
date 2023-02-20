@@ -1,4 +1,4 @@
-﻿<krpano>
+﻿<krpano onstart="jscall(reactKrpano.onStart())">
 
 	<!-- grid preview pano -->
 	<preview type="grid(cube,64,64,512,0xCCCCCC,0xF6F6F6,0x999999);" />
