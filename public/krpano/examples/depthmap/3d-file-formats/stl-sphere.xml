@@ -1,0 +1,10 @@
+<krpano>
+	
+	<preview url="sphere/pano_preview.jpg" />
+	
+	<image>
+		<sphere url="sphere/pano.jpg" />
+		<depthmap url="model.stl" hittest="true" scale="100" />
+	</image>
+	
+</krpano>

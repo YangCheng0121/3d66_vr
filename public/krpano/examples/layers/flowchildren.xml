@@ -1,0 +1,34 @@
+<krpano bgcolor="0xFFFFFF">
+	
+	<style name="item" type="text" bgborder="1 0xAAAAAA" 
+		onclick="switch(scale,1,2);"
+		/>
+	
+	<layer type="container" bgborder="1 0xFF0000" x="10" y="10" flowchildren="v" childmargin="10" childflowspacing="10">
+		
+		<layer type="text" html="Automatic Layouts" bgalpha="0" />
+	
+		<layer type="text" html="Full dynamic:" bgalpha="0" flowspacing="10 0 0" />
+		<layer type="container" bgborder="1 0x00AA00" flowchildren="h" childmargin="5" childflowspacing="5" flowspacing="0 0 10">
+			<layer style="item" html="Test1" />
+			<layer style="item" html="Test2" />
+			<layer style="item" html="Test3" />
+		</layer>
+		
+		<layer type="text" html="Fixed width and overflow:" bgalpha="0" flowspacing="10 0 0" />
+		<layer type="container" bgborder="1 0x0000FF" width="100" flowchildren="h" flowoverflow="true" childmargin="5" childflowspacing="5" flowspacing="0 0 10">
+			<layer style="item" html="Test1" />
+			<layer style="item" html="Test2" />
+			<layer style="item" html="Test3" />
+		</layer>
+		
+		<layer type="text" html="Flow-expand:" bgalpha="0" flowspacing="10 0 0" />
+		<layer type="container" bgborder="1 0x0000FF" height="150" flowchildren="v" flowoverflow="true" childmargin="5" childflowspacing="5" flowspacing="0 0 10">
+			<layer style="item" html="Test1" />
+			<layer style="item" html="Test2" flowexpand="true" />
+			<layer style="item" html="Test3" />
+		</layer>
+	
+	</layer>
+
+</krpano>

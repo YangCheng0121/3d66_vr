@@ -1,0 +1,75 @@
+<krpano>
+	
+	<!-- another scrollarea example and a test for variable framerates and the adaptivefrictions motions -->
+	
+	<include url="%VIEWER%/plugins/fps.xml" />
+	
+	<preview type="grid" />
+	
+	<view fovmin="60" fovmax="140" limitview="lookat" vlookatmin="-60" vlookatmax="+60" />
+	
+	<style name="item" type="text" width="100%" bgcolor="0xBBBBBB" bgalpha="1.0" bgborder="1 0xFFFFFF" />
+	<style name="item2" style="item" bgcolor="0x999999" />
+	
+	<layer name="box" type="container"
+		align="center" width="200" height="300"
+		bgcolor="0x777777" bgalpha="1.0" bgborder="2 0xAAAAAA 1.0" bgcapture="true" capturewheel="true"
+	>
+		<layer name="scrollarea"
+			type="scrollarea"
+			align="lefttop" 
+			width="100%"
+			flowchildren="v"
+			childflowspacing="3"
+			childmargin="4"
+			scrolltype="smooth"
+			direction="v"
+			draggable="true"
+			mwheel="true"
+		>
+			<layer style="item" html="123" />
+			<layer style="item2" html="456" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="NO WHEEL SCROLL HERE" height="100" bgcolor="0x2288AA" capturewheel="true" textalign="center" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Test Lines[br]Test" />
+			<layer style="item2" html="Test Lines[br]Test" />
+			<layer style="item" html="Last line..." />
+			
+		</layer>
+	</layer>
+	
+	
+	<style name="fpsbuttons" type="text" bgcolor="0xAAAAAA" bgalpha="1.0" bgroundedge="7" width="42" height="28" textalign="center" />
+	
+	<layer style="fpsbuttons" width=""
+		align="righttop" x="10" y="10" padding="16 8"
+		onloaded="html='adaptivefrictions='+display.adaptivefrictions;" onclick="switch(display.adaptivefrictions); onloaded();" />
+		/>
+	
+	<layer if="1" name="tetetet" type="container" flowchildren="v" childflowspacing="4" align="righttop" x="10" y="50">
+		<layer type="text" align="center" html="FPS" css="color:white;" bgalpha="0" enabled="false" />
+		<layer style="fpsbuttons" html="auto" onclick="display.framerate='auto';" />
+		<layer style="fpsbuttons" html="30" onclick="display.framerate=30;" />
+		<layer style="fpsbuttons" html="50" onclick="display.framerate=50;" />
+		<layer style="fpsbuttons" html="60" onclick="display.framerate=60;" />
+		<layer style="fpsbuttons" html="75" onclick="display.framerate=75;" />
+		<layer style="fpsbuttons" html="80" onclick="display.framerate=80;" />
+		<layer style="fpsbuttons" html="100" onclick="display.framerate=100;" />
+		<layer style="fpsbuttons" html="120" onclick="display.framerate=120;" />
+		<layer style="fpsbuttons" html="144" onclick="display.framerate=144;" />
+		<layer style="fpsbuttons" html="240" onclick="display.framerate=240;" />
+	</layer>
+	
+</krpano>

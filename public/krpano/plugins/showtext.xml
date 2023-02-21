@@ -2,17 +2,15 @@
 	<!--
 		showtext() xml plugin
 		- showtext() and <textstyle> support for HTML5
-		- extended <textstyle> functionality compared to the build-in showtext() action
-		- just include this xml file via: <include url="showtext.xml" />
 		- docu: https://krpano.com/plugins/showtext/
-		- useKrpano 1.20
+		- krpano 1.21
 	-->
 
 
 	<!-- predefine a DEFAULT textstyle element -->
 	<textstyle name="DEFAULT" />
-
-
+	
+	
 
 
 	<!-- the automatic running (autorun=preinit) install action -->
@@ -29,12 +27,12 @@
 		set(showtext_fadeout, 0.0);
 		set(showtext_clipping, false);
 	</action>
-
+	
 
 	<action name="showtext" scope="private:showtext" args="text, style">
 		if(!style, set(style, DEFAULT));
-
-		if(global.textstyle[get(style)],
+		
+		if(global.textstyle[get(style)], 
 			copy(showtext_style, style);
 		  ,
 			warning("showtext() - there is no textstyle '", style, "' defined!");
@@ -42,7 +40,7 @@
 		);
 
 		copy(showtext_text, text);
-
+		
 		if(showtext_text != showtext_prevtext,
 			copy(showtext_prevtext, showtext_text);
 			showtext_createnewtext();
@@ -50,7 +48,7 @@
 			delayedcall(showtext_timer, get(showtext_timeout), showtext_hide() );
 		  );
 	</action>
-
+	
 
 	<action name="showtext_createnewtext" scope="private:showtext">
 		<!-- stop running mouse and alpha update calls -->
@@ -62,7 +60,7 @@
 			copy(showtext_prevstyle, showtext_style);
 			removelayer(showtext_tf);
 		  );
-
+		  
 		<!-- create a new textfield plugin layer -->
 		addlayer(showtext_tf);
 
@@ -146,7 +144,7 @@
 		  );
 
 		if(ts.noclip !== null, copy(showtext_clipping,ts.noclip), set(showtext_clipping, true));
-
+		
 		if(showtext_clipping,
 			set(tf.onloaded,    showtext_do_clipping() );
 			set(tf.onautosized, showtext_do_clipping() );
@@ -171,7 +169,6 @@
 
 	<action name="showtext_do_clipping" scope="private:showtext">
 		if(showtext_clipping,
-			global.layer[showtext_tf].updatepos();
 			copy(tf_px, global.layer[showtext_tf].pixelx);
 			copy(tf_py, global.layer[showtext_tf].pixely);
 			if(tf_px LT 0,

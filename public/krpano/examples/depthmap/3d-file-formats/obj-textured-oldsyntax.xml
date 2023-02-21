@@ -1,0 +1,10 @@
+<krpano>
+	
+	<preview url="texture_preview.jpg" />
+	
+	<image>
+		<sphere url="texture.jpg" />
+		<depthmap url="model.obj" textured="true" hittest="true" scale="100" />
+	</image>
+
+</krpano>

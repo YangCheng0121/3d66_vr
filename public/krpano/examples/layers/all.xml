@@ -1,0 +1,26 @@
+<krpano bgcolor="0xFFFFFF">
+	
+	<style name="item" type="text" align="center" bgborder="1 0x777777" padding="4 8" />
+	
+	<layer type="container" align="center" flowchildren="v" childflowspacing="10" childmargin="16" bgcolor="0xFFFFFF" bgalpha="1.0">
+		<layer type="text" html="[u]Layer Examples[/u]" align="center" enabled="false" bgalpha="0" />
+		
+		<layer style="item" html="css-styling.xml" onclick="openurl('krpano.html?xml=examples/layers/css-styling.xml','_self');" />
+		
+		<layer style="item" html="drag-layer.xml" onclick="openurl('krpano.html?xml=examples/layers/drag-layer.xml','_self');" />
+		
+		<layer style="item" html="three-column-layout.xml" onclick="openurl('krpano.html?xml=examples/layers/three-column-layout.xml','_self');" />
+		<layer style="item" html="grid-layout.xml" onclick="openurl('krpano.html?xml=examples/layers/grid-layout.xml','_self');" />
+		
+		<layer style="item" html="flowchildren.xml" onclick="openurl('krpano.html?xml=examples/layers/flowchildren.xml','_self');" />
+		
+		<layer style="item" html="scalemode.xml" onclick="openurl('krpano.html?xml=examples/layers/scalemode.xml','_self');" />
+		
+		<layer style="item" html="scrollarea-infobox.xml" onclick="openurl('krpano.html?xml=examples/layers/scrollarea-infobox.xml','_self');" />
+		<layer style="item" html="scrollarea_and_adaptivefrictions.xml" onclick="openurl('krpano.html?xml=examples/layers/scrollarea_and_adaptivefrictions.xml','_self');" />
+		
+		<layer style="item" html="textfield-editable.xml" onclick="openurl('krpano.html?xml=examples/layers/textfield-editable.xml','_self');" />
+		
+	</layer>
+	
+</krpano>

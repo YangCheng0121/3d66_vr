@@ -1,35 +1,31 @@
 ﻿<krpano>
-
+	
 	<!--
 		contextmenu.xml
-		useKrpano 1.20.11
-
-		A helper script for changing the mouse-control-mode and the
-		viewing projections via the context-menu.
+		krpano 1.21
+		
+		A helper script for changing the control-mode and 
+		setting some viewing projections via the context-menu.
 	-->
-
+	
 	<contextmenu fullscreen="true" versioninfo="true">
 		<item name="kr" caption="KRPANO"     />
 		<item name="fs" caption="FULLSCREEN" />
 		<item name="cc" caption="Change Controlmode" onclick="cm_changecontrolmode();"  separator="above" />
 		<item name="nv" caption="Normal View"        onclick="cm_normal_view();"        showif="view.vlookatrange == 180" separator="above"      />
-		<item name="fv" caption="Fisheye View"       onclick="cm_fisheye_view();"       showif="view.vlookatrange == 180" devices="flash|webgl" />
-		<item name="sv" caption="Stereographic View" onclick="cm_stereographic_view();" showif="view.vlookatrange == 180" devices="flash|webgl" />
+		<item name="fv" caption="Fisheye View"       onclick="cm_fisheye_view();"       showif="view.vlookatrange == 180" devices="webgl" />
+		<item name="sv" caption="Stereographic View" onclick="cm_stereographic_view();" showif="view.vlookatrange == 180" devices="webgl" />
 		<item name="av" caption="Architectural View" onclick="cm_architectural_view();" showif="view.vlookatrange == 180"                       />
-		<item name="pv" caption="Pannini View"       onclick="cm_pannini_view();"       showif="view.vlookatrange == 180" devices="flash|webgl" />
-		<item name="lp" caption="Little Planet View" onclick="cm_littleplanet_view();"  showif="view.vlookatrange == 180" devices="flash|webgl" />
+		<item name="pv" caption="Pannini View"       onclick="cm_pannini_view();"       showif="view.vlookatrange == 180" devices="webgl" />
+		<item name="lp" caption="Little Planet View" onclick="cm_littleplanet_view();"  showif="view.vlookatrange == 180" devices="webgl" />
 	</contextmenu>
 
 
 	<action name="cm_changecontrolmode">
-		if(device.html5,
-			switch(control.mode, moveto, drag, follow);
-			cm_changecontrolmode_updatecaption();
-		  ,
-			switch(control.mode, moveto, drag);
-		);
+		switch(control.mode, moveto, drag, follow);
+		cm_changecontrolmode_updatecaption();
 	</action>
-
+		
 	<action name="cm_changecontrolmode_updatecaption" autorun="onstart" devices="html5">
 		txtadd(contextmenu.item[cc].caption,
 			"Controlmode: ",

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>krpano Javascript Sync Example</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta http-equiv="x-ua-compatible" content="IE=edge" />
+	<style>
+		html { height:100%; }
+		body { height:100%; overflow:hidden; margin:0; padding:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#FFFFFF; background-color:#000000; }
+	</style>
+</head>
+<body>
+
+	<!-- krpano 1.21 -->
+	<script src="../../../krpano.js"></script>
+	
+	<div id="container" style="position:absolute; left:0; top:0; width:100%; height:100%;">
+		<div id="krpano1" style="position:absolute; left:0%;  top:0; width:50%; height:100%;"></div>
+		<div id="krpano2" style="position:absolute; left:50%; top:0; width:50%; height:100%;"></div>
+	</div>
+	
+	<script>
+		var krpano1 = null;
+		var krpano2 = null;
+		
+		embedpano({target:"krpano1", xml:"pano1.xml", onready:function(krpano){ krpano1 = install_sync_viewers(krpano); }});
+		embedpano({target:"krpano2", xml:"pano2.xml", onready:function(krpano){ krpano2 = install_sync_viewers(krpano); }});
+		
+		function install_sync_viewers(krpano)
+		{
+			var sync_events = krpano.events.createItem("sync_viewers");
+			sync_events.keep = true;
+			sync_events.onmousedown =
+			sync_events.onmousewheel =
+			sync_events.onviewchange =
+			sync_events.oncontextmenu = sync_viewers;
+			
+			// use the container as fullscreen element
+			krpano.display.customFullscreenElement = document.getElementById("container");
+			
+			return krpano;
+		}
+		
+		function sync_viewers()
+		{
+			if (krpano1 && krpano2)
+			{
+				var viewFrom, viewTo;
+				
+				if (krpano1.lastuserinteraction > krpano2.lastuserinteraction)
+				{
+					// krpano1 is active
+					
+					// Remove the focus from the other viewer.
+					// That will stop any movement frictions, release pressed keyboard-keys and close an open contextmenu.
+					krpano2.releasefocus();
+					
+					viewFrom = krpano1.view;
+					viewTo = krpano2.view;
+				}
+				else
+				{
+					// krpano2 is active
+					
+					// Remove the focus from the other viewer.
+					// That will stop any movement frictions, release pressed keyboard-keys and close an open contextmenu.
+					krpano1.releasefocus();
+					
+					viewFrom = krpano2.view;
+					viewTo = krpano1.view;
+				}
+				
+				viewTo.hlookat = viewFrom.hlookat;
+				viewTo.vlookat = viewFrom.vlookat;
+				viewTo.camroll = viewFrom.camroll;
+				viewTo.fovtype = viewFrom.fovtype;
+				viewTo.fov = viewFrom.fov;
+				viewTo.fisheye = viewFrom.fisheye;
+				viewTo.architectural = viewFrom.architectural;
+				viewTo.pannini = viewFrom.pannini;
+				viewTo.tx = viewFrom.tx;
+				viewTo.ty = viewFrom.ty;
+				viewTo.tz = viewFrom.tz;
+				viewTo.ox = viewFrom.ox;
+				viewTo.oy = viewFrom.oy;
+				viewTo.oz = viewFrom.oz;
+				viewTo.rx = viewFrom.rx;
+				viewTo.ry = viewFrom.ry;
+			}
+		}
+	</script>
+
+</body>
+</html>

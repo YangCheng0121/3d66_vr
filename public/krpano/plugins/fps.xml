@@ -1,8 +1,8 @@
 <krpano>
 
 	<!--
-		fps (frames per second) xml plugin
-		- this plugin shows the current average rendering frame-rate
+		FPS (frames per second) performance measuring tool.
+		This tools shows the current average rendering frame-rate in the left-top corner.
 	-->
 
 	<action name="fps_install" autorun="preinit" scope="local">

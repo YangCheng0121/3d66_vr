@@ -1,0 +1,38 @@
+<krpano>
+	
+	<preview type="grid();" />
+	
+	<!-- new method (since 1.20.11) -->
+	<hotspot name="iframe"
+	         ath="-30" atv="0"
+	         distorted="true"
+	         type="iframe"
+	         iframeurl="https://www.youtube.com/embed/p4j18C0CEEg"
+	         width="640" 
+	         height="360"
+	         />
+	
+	<!-- old method -->
+	<hotspot name="iframe2"
+	         url="black.png"
+	         ath="30" atv="0"
+	         distorted="true"
+	         renderer="css3d"
+	         onloaded="add_iframe('https://www.youtube.com/embed/p4j18C0CEEg', 640, 360);"
+	         />
+
+	<action name="add_iframe" type="Javascript">
+		var iframe = document.createElement("iframe");
+		iframe.style.position = "absolute";
+		iframe.style.left = 0;
+		iframe.style.top = 0;
+		iframe.style.width = "100%";
+		iframe.style.height = "100%";
+		iframe.style.border = 0;
+		iframe.src = args[1];
+		caller.sprite.style.overflow = "hidden";
+		caller.registercontentsize(args[2], args[3]);
+		caller.sprite.appendChild(iframe);
+	</action>
+	
+</krpano>

@@ -1,19 +1,18 @@
 <krpano>
 
 	<!--
-		useKrpano 1.20.10 combobox.xml Plugin
+		combobox.xml
+		krpano 1.21 
+		
 		https://krpano.com/plugins/combobox/
 
+		Combobox Plugin
 		- This plugin converts <combobox> elements in the current xml
 		  into <layer> container, scrollarea and textfield elements.
 		- Additionally it's also possible to add and remove combobox
 		  elements also dynamically.
 		- The full xml implementation allows many ways of customizing
 		  for own needs - custom designs/styles, custom functionality.
-		- The plugin works automatically the same for HTML5 and Flash.
-		- It's possible to use this plugin as replacement for the old
-		  combobox.swf/combobox.js plugins, the action interfaces are
-		  the same.
 
 
 		Syntax for Static XML Code:
@@ -48,20 +47,15 @@
 
 		- Combobox Layer Attributes:
 
-			layer[cbname].item              - useKrpano Array of the items
+			layer[cbname].item              - krpano Array of the items
 			layer[cbname].selecteditemindex - current selected item index
 	-->
 
-	<!-- path to the scrollarea plugin -->
-	<combobox_scrollareaplugin
-		url.html5="%VIEWER%/plugins/scrollarea.js"
-		url.flash="%VIEWER%/plugins/scrollarea.swf"
-		/>
 
 	<!-- core internal layer styles -->
-	<style name="combobox_container_style" type="container" maskchildren="true" bgcapture="true" visible="false" onclick="combobox_onclick_event();" mergedalpha="false" alpha="1.0" />
-	<style name="combobox_marker_style" type="text" align="righttop" edge="center" html="▼" havemarkersize="false" onautosized="set(havemarkersize,true);" mergedalpha="false" alpha="1.0" />
-	<style name="combobox_item_style" type="text" wordwrap="false" vcenter="true" align="lefttop" onover="if(!combbox_item_pressed,onoveritem());asyncloop(hovering,,if(!combbox_item_pressed,onoutitem()));" ondown="onoveritem(); set(combbox_item_pressed,true);" onup="onoutitem(); set(combbox_item_pressed,false);" onoveritem="set(bg,true);" onoutitem="set(bg,false);" mergedalpha="false" alpha="1.0" />
+	<style name="combobox_container_style" type="container" maskchildren="true" bgcapture="true" visible="false" onclick="combobox_onclick_event();" alpha="1.0" />
+	<style name="combobox_marker_style" type="text" align="righttop" edge="center" html="▼" havemarkersize="false" onautosized="set(havemarkersize,true);" alpha="1.0" />
+	<style name="combobox_item_style" type="text" wordwrap="false" vcenter="true" align="lefttop" onover="if(!combbox_item_pressed,onoveritem());asyncloop(hovering,,if(!combbox_item_pressed,onoutitem()));" ondown="onoveritem(); set(combbox_item_pressed,true);" onup="onoutitem(); set(combbox_item_pressed,false);" onoveritem="set(bg,true);" onoutitem="set(bg,false);" alpha="1.0" />
 
 	<!-- several pre-defined designs -->
 	<combobox_design name="default" margin="2" open_close_speed="0.25">
@@ -79,17 +73,17 @@
 	</combobox_design>
 
 
-
-
+	
+	
 
 	<!-- internal events -->
 	<events name="combobox_xml_plugin_events" keep="true"
 	        onresize="combobox_closelist();"
 	        />
 
-	<!-- useKrpano version check -->
+	<!-- krpano version check -->
 	<action name="combobox_versioncheck" autorun="preinit">
-		if(build LT '2020-11-01',
+		if(build LT '2022-01-01',
 			error('combobox.xml - too old krpano version!');
 			set(events[combobox_xml_plugin_events].name, null);
 			set(action[addComboboxLayer].content, '');
@@ -102,10 +96,10 @@
 	<action name="combobox_xml_init">
 		<!-- set auto call again on next xml load -->
 		set(action[combobox_xml_init].autorun, onload);
-
+		
 		combobox_parse_xml_elements();
 	</action>
-
+	
 
 	<!-- convert all <combobox> elements to layers -->
 	<action name="combobox_parse_xml_elements" scope="localonly">
@@ -143,7 +137,8 @@
 		addlayer(get(cbname));
 		copy(cb, global.layer[get(cbname)]);
 		set(cb.keep, true);
-
+		set(cb.maxopenheight, 1000);
+		
 		<!-- copy the design settings (or set defaults) -->
 		if(!global.combobox_design[get(design)].name, set(design,'default'));
 		copy(cb.cbdesign, global.combobox_design[get(design)]);
@@ -169,9 +164,9 @@
 		addlayer(get(saname));
 		copy(sa, global.layer[get(saname)]);
 		copy(sa.parent, cbname);
-		copy(sa.url, global.combobox_scrollareaplugin.url);
 		copy(sa.keep, true);
 		copy(sa.align, lefttop);
+		set(sa.type, 'scrollarea');
 		set(sa.direction, v);
 		set(sa.enabled, false);
 		set(sa.width, 100%);
@@ -222,10 +217,10 @@
 	<!-- dynamically add items -->
 	<action name="combobox_additem" scope="localonly" args="cbname, itemname, itemcaption, itemonclick, itemoninit">
 		copy(cb, global.layer[get(cbname)]);
-
+		
 		<!-- when no item name is set, generate an automatic one -->
 		if(itemname === null, calc(itemname, 'autoname_' + cb.item.count); );
-
+		
 		<!-- save the item caption and onclick event -->
 		copy(cb.item[get(itemname)].caption, itemcaption);
 		copy(cb.item[get(itemname)].onclick, itemonclick);
@@ -306,7 +301,7 @@
 	<action name="combobox_do_event_call" scope="local" args="cb, eventcode">
 		if(eventcode !== null, callwith(cb, get(eventcode) ); );
 	</action>
-
+	
 
 	<!-- default onclick event for items: select the current item, close the list and call the item onclick event -->
 	<action name="combobox_item_onclick" scope="localonly">
@@ -345,7 +340,7 @@
 				<!-- when opened, just close to the selected item -->
 				combobox_closelist();
 			  ,
-				if(global.layer[get(cbname)].scrollarea.loaded,
+				if(global.layer[get(cbname)].scrollarea.loaded AND cb.autosize_max_h GT 0,
 					global.layer[get(cbname)].scrollarea.stopscrolling();
 					calc(offset, cb.selecteditemindex*(cb.autosize_max_h + cb.margin));
 					tween(global.layer[get(cbname)].marker.y, calc(cb.margin + offset + cb.autosize_max_h/2), 0);
@@ -401,7 +396,7 @@
 
 		copy(cb, global.layer[get(cbname)]);
 		copy(global.openedcombobox, cb);
-
+		
 		<!-- move to top -->
 		copy(cb.backupzorder, cb.zorder);
 		set(cb.zorder, 999);
@@ -419,7 +414,7 @@
 
 		<!-- the required space for full opening: -->
 		calc(openheight, cb.margin + cb.autosize_cnt*(cb.margin+cb.autosize_max_h) );
-
+		
 		<!-- vertical centered alignment? -->
 		calc(cb_edge, cb.edge ? cb.edge : cb.align);
 		calc(iscentered, cb_edge == 'left' OR cb_edge == 'center' OR cb_edge == 'right');
@@ -432,6 +427,8 @@
 		<!-- limit the height to the available space (minus some margin) -->
 		Math.min(openheight, calc(openheight_max + cbheight - 20));
 
+		clamp(openheight, 0, get(cb.maxopenheight));
+		
 		<!-- need vertical offset? (depending on the available space and the align/edge setting) -->
 		set(yoffset, null);
 		calc(top_overflow, -ly1 + global.area.pixely + openheight/2);
@@ -463,23 +460,24 @@
 		);
 
 		<!-- center the opened list at the selected item -->
-		calc(centeritem_y, -1 * (cb.margin + cb.selecteditemindex*(cb.margin+cb.autosize_max_h) + cb.autosize_max_h/2 - openheight/2));
-		clamp(centeritem_y, calc(openheight - cb.scrollarea.height), 0);
+		if( indexof(cb_edge,'top') GE 0,
+			calc(centeritem_y, -1 * (cb.margin + cb.selecteditemindex*(cb.margin+cb.autosize_max_h) - cb.margin));
+			clamp(centeritem_y, calc(openheight - cb.scrollarea.height), 0);
+		  ,
+			indexof(cb_edge,'bottom') GE 0,
+			calc(centeritem_y, -1 * (cb.margin + cb.selecteditemindex*(cb.margin+cb.autosize_max_h) + cb.autosize_max_h - openheight + cb.margin));
+			clamp(centeritem_y, calc(openheight - cb.scrollarea.height), 0);
+		  ,
+			calc(centeritem_y, -1 * (cb.margin + cb.selecteditemindex*(cb.margin+cb.autosize_max_h) + cb.autosize_max_h/2 - openheight/2));
+			clamp(centeritem_y, calc(openheight - cb.scrollarea.height), 0);
+		);
 
 		<!-- apply the changes now -->
 		tween(global.layer[get(cbname)].height, get(openheight), get(cb.open_close_speed));
 		tween(global.layer[get(cbname)].scrollarea.y, get(centeritem_y), get(cb.open_close_speed), default, global.layer[get(cbname)].scrollarea.update(); );
 
-		<!-- special html5/flash case:
-			 rotating textfields (the marker symbol here) are not possible in
-			 flash (a flashplayer limitation), so use a rotated symbol instead.
-		-->
-		if(global.device.html5,
-			tween(global.layer[get(cbname)].marker.rotate, 90, get(cb.open_close_speed));
-		  ,
-			set(global.layer[get(cbname)].marker.html, '◀');
-		);
-
+		tween(global.layer[get(cbname)].marker.rotate, 90, get(cb.open_close_speed));
+		
 		<!-- enable the scrollarea to allow the user to drag it -->
 		set(cb.scrollarea.enabled, true);
 
@@ -493,10 +491,10 @@
 		if(global.openedcombobox !== null,
 			copy(cb, global.openedcombobox);
 			delete(global.openedcombobox);
-
+			
 			<!-- restore zorder -->
 			copy(cb.zorder, cb.backupzorder);
-
+			
 			<!-- clear the global onmousedown event -->
 			set(global.events[combobox_xml_plugin_events].onmousedown, null);
 
@@ -510,12 +508,7 @@
 			tween(global.layer[get(cb.name)].height, calc(2*cb.margin + cb.autosize_max_h), get(cb.open_close_speed));
 			tween(global.layer[get(cb.name)].scrollarea.y, calc(-offset), get(cb.open_close_speed), default, global.layer[get(cb.name)].scrollarea.update(); );
 			tween(global.layer[get(cb.name)].marker.y, calc(cb.margin + offset + cb.autosize_max_h/2), get(cb.open_close_speed));
-			<!-- special html5/flash case: rotate marker or change symbol -->
-			if(global.device.html5,
-				tween(global.layer[get(cb.name)].marker.rotate, 0, get(cb.open_close_speed));
-			  ,
-				set(global.layer[get(cb.name)].marker.html, '▼');
-			);
+			tween(global.layer[get(cb.name)].marker.rotate, 0, get(cb.open_close_speed));
 		);
 	</action>
 

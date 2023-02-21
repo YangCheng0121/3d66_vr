@@ -1,0 +1,8 @@
+<krpano>
+	
+	<image>
+		<!-- the texture will get loaded from the model.mtl -->
+		<depthmap url="model.obj" hittest="true" scale="100" />
+	</image>
+
+</krpano>

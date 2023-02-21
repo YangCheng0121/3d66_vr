@@ -1,0 +1,11 @@
+<krpano>
+	
+	
+	
+	<image>
+		<preview url="cube/pano_cspreview.jpg" />
+		<cube url="cube/pano_%s.jpg" />
+		<depthmap url="model.depth" hittest="true" scale="100" />
+	</image>
+	
+</krpano>

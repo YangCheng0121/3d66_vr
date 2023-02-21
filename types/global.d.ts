@@ -16,3 +16,4 @@ declare namespace NextProps {
         login: Function;
     }
 }
+

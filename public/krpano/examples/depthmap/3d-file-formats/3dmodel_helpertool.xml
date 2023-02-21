@@ -1,0 +1,299 @@
+<krpano>
+
+
+	<!-- layout -->
+
+	<layer name="depthmap_helpertool" keep="true" type="container"
+	       align="right" x="10" width="200" xheight="212"
+	       bgalpha="1.0" bgcolor="0xFFFFFF" bgborder="0 0x00000 0.7" bgroundedge="1" bgshadow="0 1 4 0x000000 1.0"
+	       flowchildren="v" childflowspacing="8" childmargin="8"
+	       >
+
+		<layer name="dmht_info" style="dmht_text" align="top" y="8"
+		       html="3D-Model Pano Mapping"
+		       ondown="dmht_layerdragging(get(layer[depthmap_helpertool]));"
+		       />
+
+
+		<layer name="dmht_originx" style="dmht_button|dmht_value_control" align="top" x="0" y="32" width="180" flowspacing="3"
+		       varstep="1"
+		       vardragrange="10.0"
+		       getvar="copy(var, image.depthmap.originpoint.x);"
+		       setvar="if(image.depthmap.originfromimage, getvar(), copy(image.depthmap.originpoint.x, var);); set(image.depthmap.originhaschanged,true); updatescreen(); roundval(tmp,var,1); txtadd(html,'origin.x: ',get(tmp)); invalidatescreen();"
+		       />
+		
+		<layer name="dmht_originy" style="dmht_button|dmht_value_control" align="top" x="0" y="32" width="180" flowspacing="3"
+		       varstep="1"
+		       vardragrange="10.0"
+		       getvar="copy(var, image.depthmap.originpoint.y);"
+		       setvar="if(image.depthmap.originfromimage, getvar(), copy(image.depthmap.originpoint.y, var);); set(image.depthmap.originhaschanged,true); updatescreen(); roundval(tmp,var,1); txtadd(html,'origin.y: ',get(tmp)); invalidatescreen();"
+		       />
+	
+		<layer name="dmht_originz" style="dmht_button|dmht_value_control" align="top" x="0" y="32" width="180" flowspacing="3"
+		       varstep="1"
+		       vardragrange="10.0"
+		       getvar="copy(var, image.depthmap.originpoint.z);"
+		       setvar="if(image.depthmap.originfromimage, getvar(), copy(image.depthmap.originpoint.z, var);); set(image.depthmap.originhaschanged,true); updatescreen(); roundval(tmp,var,1); txtadd(html,'origin.z: ',get(tmp)); invalidatescreen();"
+		       />
+
+		<layer name="dmht_linkimage" style="dmht_button" align="top" width="180" height="auto" padding="4 8" flowspacing="0 0 10"
+			html="Link origin to image: no"
+			onclick="if(image.depthmap.origin != 'image',
+						image.depthmap.origin = 'image';
+					  ,
+						image.depthmap.originfromimage = false;
+					);
+					dmht_updatelinkstate();"
+			/>
+
+
+		<layer name="dmht_align" style="dmht_button|dmht_value_control" align="top" x="0" y="122" width="180" flowspacing="8 0 3"
+		       varstep="1"
+		       vardragrange="360"
+		       getvar="txtsplit(image.depthmap.align,'|',px,var,pz); if(px == null OR isNaN(px),set(px,0)); if(var == null OR isNaN(var),set(var,0)); if(pz == null OR isNaN(pz),set(pz,0));"
+		       setvar="if(image.depthmap.alignfromimage, getvar(), txtjoin(image.depthmap.align,'|',px,var,pz);); updatescreen(); roundval(tmp,var,1); txtadd(html,'Align: ',get(tmp),'°');"
+		       />
+	
+			
+		<layer name="dmht_linkalign" style="dmht_button" align="top" width="180" height="auto" padding="4 8" flowspacing="3 0 10"
+			html="Link align to prealign: no" 
+			onclick="if(image.depthmap.align != 'image',
+						image.depthmap.align = 'image';
+					  ,
+						image.depthmap.alignfromimage = false;
+					);
+					dmht_updatelinkstate();"
+			/>
+			
+		<layer type="container"
+			width="100%" height="1"
+			bgcolor="0x000000"
+			bgalpha="0.06"
+			/>
+			
+		
+		<layer style="dmht_button|dmht_value_control" align="top" x="0" y="32" width="180" flowspacing="3"
+		       varstep="100"
+		       vardragrange="1000.0"
+		       getvar="copy(var, image.ox);"
+		       setvar="copy(image.ox, var); updatescreen(); roundval(tmp,var,1); txtadd(html,'image.ox: ',get(tmp)); invalidatescreen();"
+		       />
+		
+		<layer style="dmht_button|dmht_value_control" align="top" x="0" y="32" width="180" flowspacing="3"
+		       varstep="100"
+		       vardragrange="1000.0"
+		       getvar="copy(var, image.oy);"
+		       setvar="copy(image.oy, var); updatescreen(); roundval(tmp,var,1); txtadd(html,'image.oy: ',get(tmp)); invalidatescreen();"
+		       />
+		
+		<layer style="dmht_button|dmht_value_control" align="top" x="0" y="32" width="180" flowspacing="3"
+		       varstep="100"
+		       vardragrange="1000.0"
+		       getvar="copy(var, image.oz);"
+		       setvar="copy(image.oz, var); updatescreen(); roundval(tmp,var,1); txtadd(html,'image.oz: ',get(tmp)); invalidatescreen();"
+		       />
+
+		<layer name="dmht_prealign" style="dmht_button|dmht_value_control" align="top" x="0" y="122" width="180" flowspacing="3"
+		       varstep="5"
+		       vardragrange="360"
+		       getvar="txtsplit(image.prealign,'|',px,var,pz); if(px == null OR isNaN(px),set(px,0)); if(var == null OR isNaN(var),set(var,0)); if(pz == null OR isNaN(pz),set(pz,0));"
+		       setvar="txtjoin(image.prealign,'|',px,var,pz); updatescreen(); roundval(tmp,var,1); txtadd(html,'Prealign: ',get(tmp),'°');"
+		       />
+
+		<layer type="container"
+			width="100%" height="1"
+			bgcolor="0x000000"
+			bgalpha="0.06"
+			/>
+			
+		<layer name="dmht_depthscale" style="dmht_button|dmht_value_control" align="top" x="0" y="62" width="180"
+		       varstep="10"
+		       vardragrange="100.0"
+		       getvar="copy(var, image.depthmap.scale); copy(startscale,var);"
+		       setvar="if(var == 0.0, set(var,0.001)); copy(image.depthmap.scale, var); updatescreen(); roundval(tmp,var,3); txtadd(html,'Scale: ',get(tmp)); updatescreen();"
+		       />
+
+		
+		
+		<layer type="container"
+			width="100%" height="1"
+			bgcolor="0x000000"
+			bgalpha="0.06"
+			/>
+			
+		<layer name="dmht_rendermode" style="dmht_button" align="top" x="0" y="152" width="180"
+		       xhtml="Rendermode: 3D Model"
+		       onloaded="dmht_updaterendermode();"
+		       onclick="dmht_tooglerendermode();"
+		       />
+
+		<layer name="dmht_dollhouseview" style="dmht_button" align="top" x="0" y="152" width="180"
+		       html="Dollhouse View"
+		       onclick="set(control.invert,true); lookto(300,35,80,default,true,true); tween(view.fisheye|view.tx|view.ty|view.tz|view.ox|view.oy|view.oz, calc('0|'+image.ox+'|'+image.oy+'|'+image.oz+'|0|0|1000'));"
+		       />
+
+		<layer name="dmht_resetview" style="dmht_button" align="top" x="0" y="182" width="180"
+		       html="Reset View"
+		       onclick="set(control.invert,false);  lookto(0,0,100,default,true,true); tween(view.fisheye|view.tx|view.ty|view.tz|view.ox|view.oy|view.oz, calc('0|'+image.ox+'|'+image.oy+'|'+image.oz+'|0|0|0'));"
+		       />
+
+	</layer>
+	
+	<events name="dmht_events" keep="true" onnewpano="dmht_updatelinkstate();" />
+	
+	<action name="dmht_updatelinkstate" scope="local">
+		isoriginlinked = image.depthmap.origin == 'image';
+		layer[dmht_linkimage].html = 'Link origin to image: ' + (isoriginlinked ? 'yes' : 'no');
+		layer[dmht_originx].alpha = isoriginlinked ? 0.5 : 1.0;
+		layer[dmht_originy].alpha = isoriginlinked ? 0.5 : 1.0;
+		layer[dmht_originz].alpha = isoriginlinked ? 0.5 : 1.0;
+		layer[dmht_originx].enabled = !isoriginlinked;
+		layer[dmht_originy].enabled = !isoriginlinked;
+		layer[dmht_originz].enabled = !isoriginlinked;
+		
+		layer[dmht_originx].varstep = 100 / image.depthmap.scale;
+		layer[dmht_originx].vardragrange = 1000 / image.depthmap.scale;
+		layer[dmht_originy].varstep = 100 / image.depthmap.scale;
+		layer[dmht_originy].vardragrange = 1000 / image.depthmap.scale;
+		layer[dmht_originz].varstep = 100 / image.depthmap.scale;
+		layer[dmht_originz].vardragrange = 1000 / image.depthmap.scale;
+		
+		isalignlinked = image.depthmap.align == 'image';
+		layer[dmht_linkalign].html = 'Link align to prealign: ' + (isalignlinked ? 'yes' : 'no');
+		layer[dmht_align].alpha = isalignlinked ? 0.5 : 1.0;
+		layer[dmht_align].enabled = !isalignlinked;
+	</action>
+
+	<action name="dmht_tooglerendermode">
+		image.reset("copy");
+		image.depthmap.rendermode = image.depthmap.rendermode == "3dmodel" ? "depthmap" : "3dmodel";
+		loadpanoimage('KEEPVIEW|KEEPMOVING','BLEND(1.0)');
+		dmht_updaterendermode();
+	</action>
+	
+	<action name="dmht_updaterendermode">
+		layer[dmht_rendermode].html = 'Rendermode: ' + (image.depthmap.rendermode == "3dmodel" ? "3D Model" : "Depthmap");
+	</action>
+
+	<!-- styles / actions -->
+
+	<style name="dmht_text"
+	       type="text"
+	       css="color:#000000;"
+	       bg="false"
+	       />
+
+	<style name="dmht_button"
+	       type="text"
+	       css="text-align:center;"
+	       padding="4 8"
+	       bgborder="1 0x000000 0.12"
+	       bgroundedge="1"
+	       bgcolor="0xFFFFFF"
+	       ondown.addevent="set(bgcolor,0xDDDDDD);"
+	       onup.addevent="set(bgcolor,0xFFFFFF);"
+	       onover.addevent="if(!pressed,set(bgcolor,0xEEEEEE));"
+	       onout.addevent="if(!pressed,set(bgcolor,0xFFFFFF));"
+	       />
+
+	<style name="dmht_value_control"
+	       ondown.addevent="dmht_value_control_ondown();"
+	       onloaded.addevent="getvar(); setvar(); dmht_value_control_add_incdec_buttons();"
+	       />
+
+
+	<!-- an action for dragging the helper tool layer -->
+	<action name="dmht_layerdragging" scope="localonly" args="layertodrag">
+		copy(backup_align, layertodrag.align);
+		copy(backup_edge, layertodrag.backup_edge);
+		layertodrag.changeorigin(lefttop,lefttop);
+		set(layertodrag.align,lefttop);
+		set(layertodrag.edge,lefttop);
+		layertodrag.updatepos();
+		copy(start_lx, layertodrag.pixelx);
+		copy(start_ly, layertodrag.pixely);
+		copy(start_mx, global.mouse.x);
+		copy(start_my, global.mouse.y);
+		asyncloop(caller.pressed,
+			calc(layertodrag.x, start_lx + global.mouse.x - start_mx);
+			calc(layertodrag.y, start_ly + global.mouse.y - start_my);
+			//clamp(layertodrag.x, 1, calc(global.stagewidth - layertodrag.pixelwidth - 1));
+			//clamp(layertodrag.y, 1, calc(global.stageheight - layertodrag.pixelheight - 1));
+		  ,
+			layertodrag.changeorigin(get(backup_align),get(backup_edge));
+		);
+	</action>
+
+
+	<!-- an action for add increase/decrease buttons on the value control -->
+	<action name="dmht_value_control_add_incdec_buttons">
+		calc(name_inc, name + '_inc');
+		calc(name_dec, name + '_dec');
+		addlayer(get(name_inc));
+		addlayer(get(name_dec));
+		copy(layer_inc, layer[get(name_inc)]);
+		copy(layer_dec, layer[get(name_dec)]);
+		layer_inc.loadstyle(dmht_button);
+		layer_dec.loadstyle(dmht_button);
+		copy(layer_inc.parent, name);
+		copy(layer_dec.parent, name);
+		copy(layer_inc.keep, keep);
+		copy(layer_dec.keep, keep);
+		set(layer_inc.align, right);
+		set(layer_dec.align, left);
+		set(layer_inc.html, '+');
+		set(layer_dec.html, '-');
+		set(layer_inc.ondown, set(stepdir,+1); dmht_value_control_incdec_ondown(); );
+		set(layer_dec.ondown, set(stepdir,-1); dmht_value_control_incdec_ondown(); );
+	</action>
+
+
+	<!-- an action for increasing or decreasing the button values -->
+	<action name="dmht_value_control_incdec_ondown">
+		copy(t1,timertick);
+		asyncloop(pressed,
+			calc(dt,timertick - t1);
+			if(dt GT 500,
+				callwith(calc('layer['+parent+']'),
+					calc(dt,timertick - t1);
+					calc(stepscale, dt GT 2000 ? (dt / 1000) : 1.0);
+					getvar();
+					calc(var, var + stepdir * stepscale * varstep / display.currentfps);
+					setvar();
+				);
+			);
+		  ,
+			calc(dt,timertick - t1);
+			if(dt LT 500,
+				callwith(calc('layer['+parent+']'),
+					getvar();
+					calc(var, (var + stepdir * varstep) / varstep);
+					Math.round(var);
+					calc(var, var * varstep);
+					setvar();
+				);
+			);
+		);
+	</action>
+
+
+	<!-- an action for changing the button value by dragging/moving the mouse around -->
+	<action name="dmht_value_control_ondown">
+		copy(startx, mouse.stagex);
+		copy(starty, mouse.stagey);
+		getvar();
+		copy(startv, var);
+		asyncloop(pressed,
+			calc(dx, (mouse.stagex - startx) / stagewidth );
+			calc(dy, (mouse.stagey - starty) / stageheight );
+			if(dx*dx GT dy*dy,
+				calc(var,startv + dx * vardragrange);
+			  ,
+				calc(var,startv + dy * vardragrange);
+			);
+			setvar();
+		  );
+	</action>
+
+
+</krpano>

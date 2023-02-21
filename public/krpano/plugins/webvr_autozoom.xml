@@ -2,12 +2,15 @@
 
 	<!--
 		webvr_autozoom.xml
-		useKrpano 1.20
+		krpano 1.21
+		
+		https://krpano.com/plugins/xmlextensions/#webvr_autozoom
 
 		A helper script for zooming in VR.
-
-		After ~2 seconds staring at one point, the view start zooming,
-		it stops and slowly zooms-out back again when looking around.
+		
+		After ~2 seconds staring at one point, the view slowly starts zooming-in.
+		When looking around, the zooming-in stops and the view starts slowly zooming-out
+		back to the normal view (the faster the looking-around the faster the zooming-out). 
 	-->
 
 	<events name="webvr_autozoom" keep="true"

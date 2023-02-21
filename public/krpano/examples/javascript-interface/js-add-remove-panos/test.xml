@@ -1,0 +1,9 @@
+﻿<krpano>
+	
+	<include url="%VIEWER%/plugins/ios_iframe_fullscreen.xml" />
+	
+	<image>
+		<cubestrip url="pano.jpg" />
+	</image>
+	
+</krpano>

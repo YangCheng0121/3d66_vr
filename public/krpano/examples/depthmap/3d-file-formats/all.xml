@@ -1,0 +1,106 @@
+<krpano>
+	
+	<include url="3dmodel_helpertool.xml" />
+	
+	<include url="%VIEWER%/plugins/contextmenu.xml" />
+	<include url="%VIEWER%/plugins/webvr.xml" />
+	<include url="%VIEWER%/plugins/depthmap_navigation.xml" />
+	<include url="%VIEWER%/plugins/iphone_fullscreen_swipe.xml" />
+
+	<depthmap_navigation collision="true" />
+	
+	
+	<xdisplay depthbuffer="true" />
+	<display depthmaprendermode="3dmodel" />
+	<xdisplay showpolys="true" />
+	
+	
+	
+	<scene name="obj_textured">
+		<include url="obj-textured.xml" />
+	</scene>
+	
+	<scene name="obj_textured_oldsyntax">
+		<include url="obj-textured-oldsyntax.xml" />
+	</scene>
+	
+	<scene name="obj_textured_mtl">
+		<include url="obj-textured-mtl.xml" />
+	</scene>
+	
+	<scene name="obj_cube">
+		<include url="obj-cube.xml" />
+	</scene>
+	
+	<scene name="obj_sphere">
+		<include url="obj-sphere.xml" />
+	</scene>
+	
+	<scene name="depth_cube">
+		<include url="depth-cube.xml" />
+	</scene>
+	
+	<scene name="depth_sphere">
+		<include url="depth-sphere.xml" />
+	</scene>
+	
+	<scene name="stl_cube">
+		<include url="stl-cube.xml" />
+	</scene>
+	
+	<scene name="stl_sphere">
+		<include url="stl-sphere.xml" />
+	</scene>
+	
+	
+	
+	<action autorun="onstart">
+		loadscene('obj_textured',null,KEEPVIEW);
+	</action>
+	
+	
+	
+	<!-- go through the scenes with the PAGE-UP/PAGE-DOWN keys -->
+	<events onkeydown="
+		if(keycode==32, tooglerendermode());
+		if(keycode == 33, nextscene(-1) );
+		if(keycode == 34, nextscene(+1) );
+		"/>
+
+	<action name="nextscene" type="Javascript"><![CDATA[
+		var new_scene_index = krpano.scene.getItem( krpano.xml.scene ).index + 1*args[1];
+		var last_scene_index = krpano.scene.count - 1;
+
+		if      (new_scene_index < 0)                new_scene_index = last_scene_index;
+		else if (new_scene_index > last_scene_index) new_scene_index = 0;
+		
+		console.log("--call loadscene--");
+		krpano.actions.loadscene(new_scene_index, null, "KEEPMOVING", "BLEND(1)");
+		console.log("--after loadscene--");
+	]]></action>
+	
+	<action name="tooglerendermode" type="Javascript"><![CDATA[
+		
+		krpano.image.reset("copy");
+		krpano.image.depthmap.rendermode = krpano.image.depthmap.rendermode == "3dmodel" ? "depthmap" : "3dmodel";
+		krpano.trace(0,"new rendermode="+krpano.image.depthmap.rendermode);
+		krpano.actions.loadpanoimage('KEEPVIEW|KEEPMOVING','BLEND(1.0)');
+		
+	]]></action>
+	
+	
+	
+	<include url="%VIEWER%/plugins/combobox.xml" />
+	
+	<combobox name="cbscenes" align="leftbottom" x="20" y="20" onloaded="add_scene_items();" />
+	
+	<action name="add_scene_items" scope="local">
+		for(set(i,0), i LT scene.count, inc(i),
+			caller.additem(get(scene[get(i)].name), calc('loadscene('+i+',null,KEEPMOVING,BLEND(0.5))') );
+		);
+	</action>
+	
+	<events name="cbupdate" keep="true" onnewscene="layer[cbscenes].selectitem(get(xml.scene));" />
+			
+	
+</krpano>

@@ -1,0 +1,11 @@
+<krpano>
+	
+	<view maxpixelzoom="1" />
+	
+	<preview url="texture_preview.jpg" />
+	
+	<image>
+		<depthmap url="model.obj" texurl="texture.jpg" hittest="true" scale="100" />
+	</image>
+
+</krpano>
