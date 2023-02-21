@@ -1,7 +1,7 @@
 <krpano>
 
 	<!--
-		krpano 1.20.10 combobox.xml Plugin
+		useKrpano 1.20.10 combobox.xml Plugin
 		https://krpano.com/plugins/combobox/
 
 		- This plugin converts <combobox> elements in the current xml
@@ -48,7 +48,7 @@
 
 		- Combobox Layer Attributes:
 
-			layer[cbname].item              - krpano Array of the items
+			layer[cbname].item              - useKrpano Array of the items
 			layer[cbname].selecteditemindex - current selected item index
 	-->
 
@@ -79,15 +79,15 @@
 	</combobox_design>
 
 
-	
-	
+
+
 
 	<!-- internal events -->
 	<events name="combobox_xml_plugin_events" keep="true"
 	        onresize="combobox_closelist();"
 	        />
 
-	<!-- krpano version check -->
+	<!-- useKrpano version check -->
 	<action name="combobox_versioncheck" autorun="preinit">
 		if(build LT '2020-11-01',
 			error('combobox.xml - too old krpano version!');
@@ -102,10 +102,10 @@
 	<action name="combobox_xml_init">
 		<!-- set auto call again on next xml load -->
 		set(action[combobox_xml_init].autorun, onload);
-		
+
 		combobox_parse_xml_elements();
 	</action>
-	
+
 
 	<!-- convert all <combobox> elements to layers -->
 	<action name="combobox_parse_xml_elements" scope="localonly">
@@ -143,7 +143,7 @@
 		addlayer(get(cbname));
 		copy(cb, global.layer[get(cbname)]);
 		set(cb.keep, true);
-		
+
 		<!-- copy the design settings (or set defaults) -->
 		if(!global.combobox_design[get(design)].name, set(design,'default'));
 		copy(cb.cbdesign, global.combobox_design[get(design)]);
@@ -222,10 +222,10 @@
 	<!-- dynamically add items -->
 	<action name="combobox_additem" scope="localonly" args="cbname, itemname, itemcaption, itemonclick, itemoninit">
 		copy(cb, global.layer[get(cbname)]);
-		
+
 		<!-- when no item name is set, generate an automatic one -->
 		if(itemname === null, calc(itemname, 'autoname_' + cb.item.count); );
-		
+
 		<!-- save the item caption and onclick event -->
 		copy(cb.item[get(itemname)].caption, itemcaption);
 		copy(cb.item[get(itemname)].onclick, itemonclick);
@@ -306,7 +306,7 @@
 	<action name="combobox_do_event_call" scope="local" args="cb, eventcode">
 		if(eventcode !== null, callwith(cb, get(eventcode) ); );
 	</action>
-	
+
 
 	<!-- default onclick event for items: select the current item, close the list and call the item onclick event -->
 	<action name="combobox_item_onclick" scope="localonly">
@@ -401,7 +401,7 @@
 
 		copy(cb, global.layer[get(cbname)]);
 		copy(global.openedcombobox, cb);
-		
+
 		<!-- move to top -->
 		copy(cb.backupzorder, cb.zorder);
 		set(cb.zorder, 999);
@@ -493,10 +493,10 @@
 		if(global.openedcombobox !== null,
 			copy(cb, global.openedcombobox);
 			delete(global.openedcombobox);
-			
+
 			<!-- restore zorder -->
 			copy(cb.zorder, cb.backupzorder);
-			
+
 			<!-- clear the global onmousedown event -->
 			set(global.events[combobox_xml_plugin_events].onmousedown, null);
 

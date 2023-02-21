@@ -1,5 +1,5 @@
 /*
-	krpano 1.20.11 Snow Plugin (build 2023-02-07)
+	useKrpano 1.20.11 Snow Plugin (build 2023-02-07)
 	https://krpano.com/plugins/snow/
 */
 var krpanoplugin=function(){function B(Z,C){C=!0===C;if(g&&D){var m=f.get("view");if(null!=m&&null!=m.r_rmatrix){var w=D,p=g.width,t=g.height;w.clearRect(0,0,p,t);var b,z=1;switch(String(a.mode).toLowerCase()){case "snow":z=1;break;case "image":z=3}var n=a.flakes;f.ismobile&&1E3<n&&(n=1E3);f.istablet&&2E3<n&&(n=2E3);var u=a.color,x=1E3*a.floor,E=1E3*a.spreading,K=1*a.imagescale,c=1*a.speed,F=1*a.shake,B=1*a.speedvariance,G=1*a.wind,q=a.winddir*Math.PI/180,A=1500;a.invert&&(x*=-1,c*=-1,A*=-1);Y!=u&&
