@@ -48,7 +48,6 @@ export function fetch(model: AxiosModel, config: any = {}) {
   })
 }
 
-
 export function post(model: AxiosModel, config: any = {}) {
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
     axios.post(model.url, model.data, config)
@@ -65,7 +64,6 @@ export function post(model: AxiosModel, config: any = {}) {
     return err;
   })
 }
-
 
 export function download(model: AxiosModel, config: any = {}) {
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
@@ -93,10 +91,6 @@ export function download(model: AxiosModel, config: any = {}) {
   })
 }
 
-
-
-
-
 export function patch(model: AxiosModel, config: any = {}) {
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
     axios.patch(model.url, model.data, config)
@@ -111,7 +105,6 @@ export function patch(model: AxiosModel, config: any = {}) {
       })
   })
 }
-
 
 export function del(model: AxiosModel, config: any = {}) {
   return new Promise<HttpResponse.ResultData | HttpResponse.ResultList<any>>((resolve, reject) => {
