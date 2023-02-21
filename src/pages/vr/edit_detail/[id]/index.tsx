@@ -1,7 +1,15 @@
 import styles from './edit_detail.module.scss'
 import dynamic from "next/dynamic";
-import {Button} from "antd";
 import {useState} from "react";
+import { Button, Form, message } from 'antd';
+
+const waitTime = (time: number = 100) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};
 
 const Krpano = dynamic(
   () => {
@@ -20,6 +28,9 @@ const RightBar = () => {
       })}>
         <span className={styles.right_bar_label}>初始视角</span>
         {viewBox && <SetViewBox/>}
+      </li>
+      <li className={styles.right_bar_item}>
+        <span className={styles.right_bar_label}>作品信息</span>
       </li>
       <li className={styles.right_bar_item}>
         <span className={styles.right_bar_label}>热点</span>
@@ -42,6 +53,10 @@ const SetViewBox = () => {
       <Button type="primary" className={styles.set} onClick={e => e.stopPropagation()}>设为初始视角</Button>
     </div>
   )
+}
+
+const WorkInformation = () =>{
+
 }
 
 function Index() {
