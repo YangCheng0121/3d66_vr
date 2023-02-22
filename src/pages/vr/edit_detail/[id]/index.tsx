@@ -1,8 +1,14 @@
 import styles from './edit_detail.module.scss'
 import dynamic from "next/dynamic";
-import React, {useState} from "react";
-import {Button, Form, Input} from 'antd';
+import React, {useEffect, useState} from "react";
+import {Button, Form, Input, Space, Tag} from 'antd';
+import {CloseOutlined} from '@ant-design/icons'
+
 import Modal from '@/common/Modal'
+import Drawer from "@/common/Drawer";
+
+const {CheckableTag} = Tag;
+const {TextArea} = Input;
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -19,26 +25,6 @@ const Krpano = dynamic(
   {ssr: false},
 );
 
-// 右边栏
-const RightBar = () => {
-
-  return (
-    <>
-      <ul className={styles.right_bar}>
-        <SetViewBox trigger={
-          <li className={styles.right_bar_item}>
-            <span className={styles.right_bar_label}>初始视角</span>
-          </li>
-        }/>
-        <WorkInformation/>
-
-        <li className={styles.right_bar_item}>
-          <span className={styles.right_bar_label}>热点</span>
-        </li>
-      </ul>
-    </>
-  )
-}
 
 // 设置视角
 const SetViewBox = (props: any) => {
@@ -76,15 +62,23 @@ const SetViewBox = (props: any) => {
 
 // 作品信息
 const WorkInformation = (props: any) => {
+  const {trigger} = props
+
+  const tagsData = ['Movies', 'Books', 'Music', 'Sports'];
+
+  const [selectedTags, setSelectedTags] = useState<string[]>(['Books']);
+
+  const handleChange = (tag: string, checked: boolean) => {
+    setSelectedTags([tag]);
+  };
+
   return (
     <Modal
       title="作品信息"
-      trigger={
-        <li className={styles.right_bar_item}>
-          <span className={styles.right_bar_label}>作品信息</span>
-        </li>
-      }>
-      <Form name="WorkInfo">
+      trigger={trigger}
+      width={680}
+    >
+      <Form name="WorkInfo" labelCol={{span: 4}}>
         <Form.Item
           label="作品名称"
           name="vr_name"
@@ -92,8 +86,83 @@ const WorkInformation = (props: any) => {
         >
           <Input placeholder="请输入作品名称"/>
         </Form.Item>
+        <Form.Item
+          label="作品分类"
+          name="vr_class_id"
+          rules={[{required: true, message: '请选择作品分类'}]}
+        >
+          <Space size={[0, 8]} wrap>
+            {tagsData.map((tag) => (
+              <CheckableTag
+                key={tag}
+                checked={selectedTags.includes(tag)}
+                onChange={(checked) => handleChange(tag, checked)}
+              >
+                {tag}
+              </CheckableTag>
+            ))}
+          </Space>
+        </Form.Item>
+        <Form.Item
+          label="设计说明"
+          name="vr_explain"
+        >
+          <TextArea rows={4}/>
+        </Form.Item>
       </Form>
     </Modal>
+  )
+}
+
+const HotSpotList = (props: any) => {
+  const {trigger} = props
+  return (
+    <Drawer
+      style={{
+        background: '#252830'
+      }}
+      closeIcon={<CloseOutlined style={{color: '#C9CDD4'}}/>}
+      headerStyle={{
+        borderBottom: '1px solid #4E5969'
+      }}
+      title={
+        <Space>
+          <h3 className={styles.hotSpotList_title}>
+            全部热点
+            <span className="hot-list-num"> 0</span>
+          </h3>
+        </Space>
+      } trigger={trigger} placement="left">
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </Drawer>
+  )
+}
+
+// 右边栏
+const RightBar = () => {
+
+  return (
+    <>
+      <ul className={styles.right_bar}>
+        <SetViewBox trigger={
+          <li className={styles.right_bar_item}>
+            <span className={styles.right_bar_label}>初始视角</span>
+          </li>
+        }/>
+        <WorkInformation trigger={
+          <li className={styles.right_bar_item}>
+            <span className={styles.right_bar_label}>作品信息</span>
+          </li>
+        }/>
+        <HotSpotList trigger={
+          <li className={styles.right_bar_item}>
+            <span className={styles.right_bar_label}>热点</span>
+          </li>
+        }/>
+      </ul>
+    </>
   )
 }
 

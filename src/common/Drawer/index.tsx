@@ -1,8 +1,8 @@
+import {Drawer, DrawerProps} from "antd";
 import React, {useMemo, useState} from "react";
-import {ModalProps, Modal} from "antd";
 
-const VModal = (props: ModalProps & { trigger?: JSX.Element; onFinish?: Function }) => {
-  const {trigger, onCancel, onFinish, ...rest} = props
+const VDrawer = (props: DrawerProps & { trigger?: JSX.Element }) => {
+  const {trigger, onClose, ...rest} = props
   const [open, setOpen] = useState(false)
 
   const triggerDom = useMemo(() => {
@@ -22,24 +22,20 @@ const VModal = (props: ModalProps & { trigger?: JSX.Element; onFinish?: Function
 
   return (
     <>
-      <Modal
-        cancelText="取消"
-        okText="保存"
+      {triggerDom}
+      <Drawer
         {...rest}
         open={open}
-        onOk={(e) => {
+        onClose={(e) => {
           setOpen(false)
-          onFinish && onFinish(e)
+          onClose && onClose(e)
         }}
-        onCancel={(e) => {
-          onCancel && onCancel(e)
-          setOpen(false)
-        }}>
+      >
         {props.children}
-      </Modal>
-      {triggerDom}
+      </Drawer>
     </>
+
   )
 }
 
-export default VModal
+export default VDrawer
