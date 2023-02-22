@@ -1,7 +1,7 @@
 import styles from './edit_detail.module.scss'
 import dynamic from "next/dynamic";
 import React, {useEffect, useState} from "react";
-import {Button, Form, Input, Space, Tag} from 'antd';
+import {Button, Form, Input, Space, Tag, Typography} from 'antd';
 import {CloseOutlined} from '@ant-design/icons'
 
 import Modal from '@/common/Modal'
@@ -9,6 +9,8 @@ import Drawer from "@/common/Drawer";
 
 const {CheckableTag} = Tag;
 const {TextArea} = Input;
+
+const {Text, Link} = Typography;
 
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
@@ -121,7 +123,7 @@ const HotSpotList = (props: any) => {
       style={{
         background: '#252830'
       }}
-      closeIcon={<CloseOutlined style={{color: '#C9CDD4'}}/>}
+      closable={false}
       headerStyle={{
         borderBottom: '1px solid #4E5969'
       }}
@@ -133,9 +135,9 @@ const HotSpotList = (props: any) => {
           </h3>
         </Space>
       } trigger={trigger} placement="left">
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <Link>
+        <Text underline>Ant Design (underline)</Text>
+      </Link>
     </Drawer>
   )
 }
