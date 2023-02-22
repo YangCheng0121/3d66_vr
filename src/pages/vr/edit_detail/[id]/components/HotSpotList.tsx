@@ -1,10 +1,8 @@
 import React from "react";
 import Drawer from "@/common/Drawer";
 import {Space, Typography} from "antd";
-import styles from "../edit_detail.module.scss";
 import {CloseOutlined} from "@ant-design/icons";
 
-const {Text, Link} = Typography;
 const HotSpotList = (props: any) => {
   const {trigger} = props
   return (
@@ -18,16 +16,17 @@ const HotSpotList = (props: any) => {
       }}
       title={
         <Space>
-          <h3 className={styles.hotSpotList_title}>
+          <Typography.Title level={3} style={{color: '#fff', fontSize: '18px'}}>
             全部热点
-            <span className="hot-list-num"> 0</span>
-          </h3>
+            <div style={{marginLeft: '4px'}}></div>
+            <span style={{color: '#C9CDD4', fontSize: '14px'}}>0</span>
+          </Typography.Title>
           <CloseOutlined />
         </Space>
       } trigger={trigger} placement="left">
-      <Link>
-        <Text underline>Ant Design (underline)</Text>
-      </Link>
+      <Typography.Link>
+        <Typography.Text underline>Ant Design (underline)</Typography.Text>
+      </Typography.Link>
     </Drawer>
   )
 }
