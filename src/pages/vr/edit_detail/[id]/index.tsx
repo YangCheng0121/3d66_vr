@@ -1,7 +1,7 @@
 import styles from './edit_detail.module.scss'
 import dynamic from "next/dynamic";
-import React, {FC, useEffect, useMemo, useState} from "react";
-import {Button} from 'antd';
+import React, {useState} from "react";
+import {Button, Form, Input} from 'antd';
 import Modal from '@/common/Modal'
 
 const waitTime = (time: number = 100) => {
@@ -30,14 +30,7 @@ const RightBar = () => {
             <span className={styles.right_bar_label}>初始视角</span>
           </li>
         }/>
-        <Modal
-          trigger={
-            <li className={styles.right_bar_item}>
-              <span className={styles.right_bar_label}>作品信息</span>
-            </li>
-          }>
-
-        </Modal>
+        <WorkInformation/>
 
         <li className={styles.right_bar_item}>
           <span className={styles.right_bar_label}>热点</span>
@@ -51,21 +44,6 @@ const RightBar = () => {
 const SetViewBox = (props: any) => {
   const {trigger} = props
   const [open, setOpen] = useState(false)
-
-  const triggerDom = useMemo(() => {
-    if (!trigger) {
-      return null;
-    }
-
-    return React.cloneElement(trigger, {
-      key: 'trigger',
-      ...trigger.props,
-      onClick: (e: any) => {
-        setOpen(!open);
-        trigger.props?.onClick?.(e);
-      },
-    });
-  }, [setOpen, trigger, open]);
 
   return (
     <>
@@ -82,14 +60,41 @@ const SetViewBox = (props: any) => {
           <Button type="primary" className={styles.set}>设为初始视角</Button>
         </div>
       }
-      {triggerDom}
+      {
+        React.cloneElement(trigger, {
+          key: 'trigger',
+          ...trigger.props,
+          onClick: (e: any) => {
+            setOpen(!open);
+            trigger.props?.onClick?.(e);
+          },
+        })
+      }
     </>
   )
 }
 
 // 作品信息
 const WorkInformation = (props: any) => {
-
+  return (
+    <Modal
+      title="作品信息"
+      trigger={
+        <li className={styles.right_bar_item}>
+          <span className={styles.right_bar_label}>作品信息</span>
+        </li>
+      }>
+      <Form name="WorkInfo">
+        <Form.Item
+          label="作品名称"
+          name="vr_name"
+          rules={[{required: true, message: '请输入作品名称'}]}
+        >
+          <Input placeholder="请输入作品名称"/>
+        </Form.Item>
+      </Form>
+    </Modal>
+  )
 }
 
 function Index() {
