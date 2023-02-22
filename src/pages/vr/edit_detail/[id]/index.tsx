@@ -2,23 +2,11 @@ import styles from './edit_detail.module.scss'
 import dynamic from "next/dynamic";
 import React, {useEffect, useState} from "react";
 import {Button, Form, Input, Space, Tag, Typography} from 'antd';
-import {CloseOutlined} from '@ant-design/icons'
-
 import Modal from '@/common/Modal'
-import Drawer from "@/common/Drawer";
+import HotSpotList from "./components/HotSpotList";
 
 const {CheckableTag} = Tag;
 const {TextArea} = Input;
-
-const {Text, Link} = Typography;
-
-const waitTime = (time: number = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
 
 const Krpano = dynamic(
   () => {
@@ -26,7 +14,6 @@ const Krpano = dynamic(
   },
   {ssr: false},
 );
-
 
 // 设置视角
 const SetViewBox = (props: any) => {
@@ -116,35 +103,8 @@ const WorkInformation = (props: any) => {
   )
 }
 
-const HotSpotList = (props: any) => {
-  const {trigger} = props
-  return (
-    <Drawer
-      style={{
-        background: '#252830'
-      }}
-      closable={false}
-      headerStyle={{
-        borderBottom: '1px solid #4E5969'
-      }}
-      title={
-        <Space>
-          <h3 className={styles.hotSpotList_title}>
-            全部热点
-            <span className="hot-list-num"> 0</span>
-          </h3>
-        </Space>
-      } trigger={trigger} placement="left">
-      <Link>
-        <Text underline>Ant Design (underline)</Text>
-      </Link>
-    </Drawer>
-  )
-}
-
 // 右边栏
 const RightBar = () => {
-
   return (
     <>
       <ul className={styles.right_bar}>
