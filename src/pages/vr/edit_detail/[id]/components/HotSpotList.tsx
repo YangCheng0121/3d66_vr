@@ -4,6 +4,7 @@ import {CloseOutlined, RightOutlined} from "@ant-design/icons";
 import useTriggerDom from "@/hooks/triggerDom";
 import styles from '../edit_detail.module.scss'
 import Padding from "@/common/Padding";
+import IconFont from "@/common/IconFont";
 
 const COLOR_PRIMARY_TEXT = '#1D2129'
 const COLOR_Typography_TEXT = '#86909C'
@@ -172,7 +173,7 @@ const HotSpotList = (props: any) => {
                   paddingLeft={12}
                   paddingRight={12}
                   style={{background: 'rgba(78, 89, 105, 0.2)', borderRadius: '6px'}}>
-                  <Row>
+                  <Row align="bottom">
                     <Col flex={2}>
                       <List.Item>
                         <List.Item.Meta
@@ -182,13 +183,22 @@ const HotSpotList = (props: any) => {
                           description={
                             <Typography
                               style={{color: COLOR_Typography_TEXT}}>
-                              Ant Design, a design language for
+                              Ant Design
                             </Typography>
                           }
                         />
                       </List.Item>
                     </Col>
-                    <Col flex={1}></Col>
+                    <Col flex={1} style={{textAlign: 'right'}}>
+                      <a>
+                        <Space>
+                          <IconFont type="icon-panorama_page_hot_pop_mod_icon_remane-copy" style={{color: '#86909C'}}/>
+                          <IconFont type="icon-panorama_page_hot_pop_mod_icon_dite" style={{color: '#86909C'}}/>
+                          <IconFont type="icon-panorama_page_hot_pop_mod_icon_delete_pic" style={{color: '#86909C'}}/>
+                        </Space>
+                      </a>
+                      <div style={{height: '10px'}}></div>
+                    </Col>
                   </Row>
                 </Padding>
                 <div style={{height: '8px'}}></div>
