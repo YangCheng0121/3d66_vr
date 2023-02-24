@@ -1,0 +1,50 @@
+.border {
+    transition: all 0.3s;
+    &::after {
+        position: absolute;
+        // border: 1px #e8e9f3 solid;
+        content: " ";
+    }
+}
+
+.top {
+    border-top: 1px #e8e9f3 solid;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.bottom {
+    border-bottom: 1px #e8e9f3 solid;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.left {
+    border-left: 1px #e8e9f3 solid;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.right {
+    border-right: 1px #e8e9f3 solid;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.hoverColor {
+    cursor: pointer;
+    &:hover {
+        border-color: #5568ff !important;
+        * {
+            color: #5568ff !important;
+        }
+    }
+}
