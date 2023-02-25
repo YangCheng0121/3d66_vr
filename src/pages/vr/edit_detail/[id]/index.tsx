@@ -17,7 +17,7 @@ const Krpano = dynamic(
 
 // 设置视角
 const SetViewBox = (props: any) => {
-  const {trigger} = props
+  const {children} = props
   const [open, setOpen] = useState(false)
 
   return (
@@ -36,12 +36,12 @@ const SetViewBox = (props: any) => {
         </div>
       }
       {
-        React.cloneElement(trigger, {
+        React.cloneElement(children, {
           key: 'trigger',
-          ...trigger.props,
+          ...children.props,
           onClick: (e: any) => {
             setOpen(!open);
-            trigger.props?.onClick?.(e);
+            children.props?.onClick?.(e);
           },
         })
       }
@@ -51,7 +51,7 @@ const SetViewBox = (props: any) => {
 
 // 作品信息
 const WorkInformation = (props: any) => {
-  const {trigger} = props
+  const {children} = props
 
   const tagsData = ['Movies', 'Books', 'Music', 'Sports'];
 
@@ -64,7 +64,7 @@ const WorkInformation = (props: any) => {
   return (
     <Modal
       title="作品信息"
-      trigger={trigger}
+      trigger={children}
       width={680}
     >
       <Form name="WorkInfo" labelCol={{span: 4}}>
@@ -108,21 +108,21 @@ const RightBar = () => {
   return (
     <>
       <ul className={styles.right_bar}>
-        <SetViewBox trigger={
+        <SetViewBox>
           <li className={styles.right_bar_item}>
             <span className={styles.right_bar_label}>初始视角</span>
           </li>
-        }/>
-        <WorkInformation trigger={
+        </SetViewBox>
+        <WorkInformation>
           <li className={styles.right_bar_item}>
             <span className={styles.right_bar_label}>作品信息</span>
           </li>
-        }/>
-        <HotSpotList trigger={
+        </WorkInformation>
+        <HotSpotList >
           <li className={styles.right_bar_item}>
             <span className={styles.right_bar_label}>热点</span>
           </li>
-        }/>
+        </HotSpotList>
       </ul>
     </>
   )

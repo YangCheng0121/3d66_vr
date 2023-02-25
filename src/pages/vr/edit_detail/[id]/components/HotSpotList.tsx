@@ -1,27 +1,25 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {Row, Space, Typography, Col, Drawer, Button, ConfigProvider, Dropdown, MenuProps, List, Avatar} from "antd";
 import {CloseOutlined, RightOutlined} from "@ant-design/icons";
-import useTriggerDom from "@/hooks/triggerDom";
 import styles from '../edit_detail.module.scss'
 import Padding from "@/common/Padding";
 import IconFont from "@/common/IconFont";
+import AddSpot from "@/pages/vr/edit_detail/[id]/components/AddSpot";
 
 const COLOR_PRIMARY_TEXT = '#1D2129'
 const COLOR_Typography_TEXT = '#86909C'
 
 const HotSpotList = (props: any) => {
-  const {trigger} = props
+  const {children} = props
   const [open, setOpen] = useState(false)
-  const triggerDom = useTriggerDom({open, setOpen, trigger})
 
   const AllDrown = () => {
-    const [dropDownOpen, setDropDownOpen] = useState(false)
     const [rotate, setRotate] = useState(0)
 
     const items: MenuProps['items'] = [
       {
         key: '1',
-        label: <span style={{color: 'red'}}>Item 1</span>,
+        label: 'Item 1',
       },
       {
         key: '2',
@@ -45,26 +43,6 @@ const HotSpotList = (props: any) => {
           selectable: true,
           defaultSelectedKeys: ['3'],
         }}
-        // dropdownRender={(menus) => {
-        //   return (
-        //     <div className={styles.drown}>
-        //       {
-        //         [1, 2, 3].map((item: any) => {
-        //           return (
-        //             <div className={styles.drown_item}
-        //                  key={item}
-        //                  onClick={() => setDropDownOpen(false)}
-        //             >
-        //               <a>
-        //                 全部热点
-        //               </a>
-        //             </div>
-        //           )
-        //         })
-        //       }
-        //     </div>
-        //   )
-        // }}
       >
         <a>
           <Typography.Text style={{color: COLOR_Typography_TEXT}}>
@@ -80,11 +58,18 @@ const HotSpotList = (props: any) => {
 
   return (
     <>
-      {triggerDom}
+      {React.cloneElement(children, {
+        ...children.props,
+        onClick: (e: any) => {
+          setOpen(!open);
+          children.props?.onClick?.(e);
+        },
+      })}
       <Drawer
         style={{
           background: '#252830'
         }}
+        push={false}
         closable={false}
         headerStyle={{
           borderBottom: '1px solid #4E5969'
@@ -94,9 +79,9 @@ const HotSpotList = (props: any) => {
           <Row align="middle">
             <Col flex={1}>
               <Space>
-                <Typography.Title level={3} style={{color: '#fff', fontSize: '18px'}}>
+                <Typography style={{color: '#fff'}}>
                   全部热点
-                </Typography.Title>
+                </Typography>
                 <span style={{color: '#C9CDD4', fontSize: '14px'}}>0</span>
               </Space>
             </Col>
@@ -123,9 +108,11 @@ const HotSpotList = (props: any) => {
             </Typography>
           </Space.Compact>
           <div style={{height: '16px'}}></div>
-          <Button block type="primary" style={{color: COLOR_PRIMARY_TEXT}}>
-            添加热点
-          </Button>
+          <AddSpot>
+            <Button block type="primary" style={{color: COLOR_PRIMARY_TEXT}}>
+              添加热点
+            </Button>
+          </AddSpot>
 
           <div style={{height: '20px'}}></div>
 
