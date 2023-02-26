@@ -136,3 +136,12 @@
     }
   }
 }
+
+.type {
+  color: #86909C;
+  background: #4E5969;
+
+  &_active {
+    color: #1D2129 !important;
+  }
+}
