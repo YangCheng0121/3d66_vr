@@ -67,12 +67,10 @@ const AddSpot = (props: any) => {
             style={{border: 'none'}}
             header={
               <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
-            } key="1">
+            }
+            key="1">
             <Radio.Group
-              onChange={(e) => {
-                console.log(e)
-                setType(e.target.value)
-              }}
+              onChange={(e) => setType(e.target.value)}
               defaultValue="a"
               buttonStyle="solid"
               size="small">
@@ -99,7 +97,7 @@ const AddSpot = (props: any) => {
             </Radio.Group>
           </Collapse.Panel>
           <Collapse.Panel style={{border: 'none'}} header="This is panel header 2" key="2">
-            <p>{text}</p>
+            <Input placeholder="Basic usage" />;
           </Collapse.Panel>
           <Collapse.Panel style={{border: 'none'}} header="This is panel header 3" key="3">
             <p>{text}</p>
