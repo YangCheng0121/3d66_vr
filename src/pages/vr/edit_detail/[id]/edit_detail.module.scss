@@ -137,11 +137,26 @@
   }
 }
 
-.type {
+.spot_type {
   color: #86909C;
   background: #4E5969;
+  border-color: transparent !important;
 
   &_active {
     color: #1D2129 !important;
+  }
+}
+
+.spot_formItem {
+  margin-bottom: 0;
+}
+
+.spot_input {
+  border: 1px solid #4E5969;
+  border-radius: 6px;
+  background: #272A32;
+  color: #fff;
+  &::placeholder {
+    color: #4E5969
   }
 }

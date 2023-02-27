@@ -71,36 +71,42 @@ const AddSpot = (props: any) => {
                 <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
               }
               key="1">
-              <Radio.Group
-                onChange={(e) => setType(e.target.value)}
-                defaultValue="a"
-                buttonStyle="solid"
-                size="small">
-                <Space>
-                  {
-                    [
-                      {label: '场景切换', value: 1},
-                      {label: '超链接', value: 2},
-                      {label: '图片', value: 3},
-                      {label: '文字', value: 4},
-                      {label: '视频', value: 5}
-                    ].map((item) => {
-                      return (
-                        <Radio.Button
-                          className={type !== item.value ? styles.type : styles.type_active}
-                          value={item.value}
-                          key={item.value}>
-                          {item.label}
-                        </Radio.Button>
-                      )
-                    })
-                  }
-                </Space>
-              </Radio.Group>
+              <Form.Item rootClassName={styles.spot_formItem}>
+                <Radio.Group
+                  onChange={(e) => setType(e.target.value)}
+                  defaultValue="a"
+                  buttonStyle="solid"
+                  size="small">
+                  <Space>
+                    {
+                      [
+                        {label: '场景切换', value: 1},
+                        {label: '超链接', value: 2},
+                        {label: '图片', value: 3},
+                        {label: '文字', value: 4},
+                        {label: '视频', value: 5}
+                      ].map((item) => {
+                        return (
+                          <Radio.Button
+                            className={type !== item.value ? styles.spot_type : styles.spot_type_active}
+                            value={item.value}
+                            key={item.value}>
+                            {item.label}
+                          </Radio.Button>
+                        )
+                      })
+                    }
+                  </Space>
+                </Radio.Group>
+              </Form.Item>
             </Collapse.Panel>
-            <Collapse.Panel style={{border: 'none'}} header="This is panel header 2" key="2">
+            <Collapse.Panel
+              style={{border: 'none'}}
+              header={
+                <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
+              } key="2">
               <Form.Item>
-                <Input name="spot_type" placeholder="Basic usage"/>;
+                <Input className={styles.spot_input} name="spot_type" placeholder="请输入热点名称(非必填)"/>;
               </Form.Item>
             </Collapse.Panel>
             <Collapse.Panel style={{border: 'none'}} header="This is panel header 3" key="3">
