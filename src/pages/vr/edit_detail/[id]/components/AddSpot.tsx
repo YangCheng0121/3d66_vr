@@ -13,12 +13,6 @@ const AddSpot = (props: any) => {
   const [type, setType] = useState(0)
   const [form, setForm] = useState<any>({})
 
-  const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
   return (
     <>
       {React.cloneElement(children, {
@@ -114,7 +108,14 @@ const AddSpot = (props: any) => {
             <Collapse.Panel style={{border: 'none'}}
                             header={<Typography.Title style={{color: '#fff'}} level={5}>样式</Typography.Title>}
                             key="3">
-              <p>{text}</p>
+              <div className={styles.spot_tabs}>
+                <div className={styles.spot_tab}>
+                  系统热点
+                </div>
+                <div className={styles.spot_tab}>
+                  自定义热点
+                </div>
+              </div>
             </Collapse.Panel>
           </Collapse>
         </Form>
