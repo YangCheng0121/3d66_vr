@@ -172,20 +172,19 @@
   }
 }
 
-.spot_tab {
-  border-color: #4E5969;
-  text-align: center;
-  font-size: 12px;
-  color: #86909C;
-  background: #252830;
-  border-inline-start: 1px solid #4E5969 !important;
-  &:before {
-    background: #252830 !important;
-  }
-
-  &.active {
-    border: 1px solid #F8BC25;
+.spot_tabs {
+  display: flex;
+  .spot_tab {
+    border-color: #4E5969;
+    text-align: center;
+    font-size: 12px;
+    color: #86909C;
     background: #252830;
-    color: #F8BC25;
+
+    &.active {
+      border: 1px solid #F8BC25;
+      background: #252830;
+      color: #F8BC25;
+    }
   }
 }
