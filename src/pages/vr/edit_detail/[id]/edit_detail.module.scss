@@ -159,4 +159,13 @@
   &::placeholder {
     color: #4E5969
   }
+
+  &_num {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(0, -50%);
+    font-size: 14px;
+    color: #86909C;
+  }
 }

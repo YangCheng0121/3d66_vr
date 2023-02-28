@@ -2,6 +2,8 @@ import {Drawer, Row, Col, Typography, Collapse, Radio, Space, Form, Input} from 
 import React, {useState} from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import Center from "@/common/Center";
+import InputNumberLimit from '@/common/InputNumberLimit'
+
 import {RollbackOutlined, CaretDownFilled} from '@ant-design/icons';
 import styles from '../edit_detail.module.scss'
 
@@ -60,7 +62,7 @@ const AddSpot = (props: any) => {
         <Form>
           <Collapse
             bordered={false}
-            defaultActiveKey={['1']}
+            defaultActiveKey={['1', '2', '3']}
             expandIcon={({isActive}) =>
               <CaretDownFilled style={{color: isActive ? '#F8BC25' : '#C9CDD4'}}
                                rotate={isActive ? 0 : -90}/>}
@@ -105,11 +107,13 @@ const AddSpot = (props: any) => {
               header={
                 <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
               } key="2">
-              <Form.Item>
-                <Input className={styles.spot_input} name="spot_type" placeholder="请输入热点名称(非必填)"/>;
+              <Form.Item className={styles.spot_formItem}>
+                <InputNumberLimit className={styles.spot_input} numberStyle={{color: '#86909C'}} maxLength={50}/>
               </Form.Item>
             </Collapse.Panel>
-            <Collapse.Panel style={{border: 'none'}} header="This is panel header 3" key="3">
+            <Collapse.Panel style={{border: 'none'}}
+                            header={<Typography.Title style={{color: '#fff'}} level={5}>样式</Typography.Title>}
+                            key="3">
               <p>{text}</p>
             </Collapse.Panel>
           </Collapse>

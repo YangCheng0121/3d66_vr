@@ -1,0 +1,11 @@
+.input {
+  padding-right: 52px;
+
+  &_num {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translate(0, -50%);
+    font-size: 14px;
+  }
+}
