@@ -13,6 +13,8 @@ const AddSpot = (props: any) => {
   const [type, setType] = useState(0)
   const [form, setForm] = useState<any>({})
   const [tab, setTab] = useState('system')
+  const [style, setStyle] = useState(null)
+  let mySpotTimer: any
 
   return (
     <>
@@ -103,7 +105,8 @@ const AddSpot = (props: any) => {
                 <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
               } key="2">
               <Form.Item className={styles.spot_formItem}>
-                <InputNumberLimit className={styles.spot_input} numberStyle={{color: '#86909C'}} maxLength={50}/>
+                <InputNumberLimit className={styles.spot_input} numberStyle={{color: '#86909C'}} maxLength={50}
+                                  placeholder="请输入热点名称(非必填)"/>
               </Form.Item>
             </Collapse.Panel>
             <Collapse.Panel style={{border: 'none'}}
@@ -125,6 +128,32 @@ const AddSpot = (props: any) => {
                   }
                 </div>
               </Row>
+              <div className={styles.spot_styleWrap}>
+                <div className={styles.spot_style}>
+                  <img
+                    onMouseEnter={(e: any) => {
+                      let width = e.target.width
+                      let height = e.target.height
+                      let frame = height / width;
+                      let i = 0
+                      mySpotTimer = setInterval(function () {
+                        // $this.css('margin-top', -width * i + 'px');
+                        e.target.style.marginTop = -width * i + 'px'
+                        i++;
+                        if (i >= frame) {
+                          i = 0;
+                        }
+                      }, 50);
+                    }}
+                    onMouseLeave={(e: any) => {
+                      clearInterval(mySpotTimer)
+                      e.target.style.marginTop = 0
+                    }}
+                    className={styles.spot_styleImg}
+
+                    src="https://static.3d66.com/vr/js/krpano/skin/hotspot/hotspot_1.png" alt=""/>
+                </div>
+              </div>
             </Collapse.Panel>
           </Collapse>
         </Form>
