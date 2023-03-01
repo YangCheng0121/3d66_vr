@@ -12,6 +12,7 @@ const AddSpot = (props: any) => {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState(0)
   const [form, setForm] = useState<any>({})
+  const [tab, setTab] = useState('system')
 
   return (
     <>
@@ -108,14 +109,22 @@ const AddSpot = (props: any) => {
             <Collapse.Panel style={{border: 'none'}}
                             header={<Typography.Title style={{color: '#fff'}} level={5}>样式</Typography.Title>}
                             key="3">
-              <div className={styles.spot_tabs}>
-                <div className={styles.spot_tab}>
-                  系统热点
+              <Row justify="center">
+                <div className={styles.spot_tabs}>
+                  {
+                    [{label: '系统热点', key: 'system'}, {label: '自定义热点', key: 'customer'}].map(item => {
+                      return (
+                        <div className={`${styles.spot_tab} ${tab === item.key ? styles.spot_tab__active : ''}`}
+                             key={item.key}
+                             onClick={() => setTab(item.key)}
+                        >
+                          {item.label}
+                        </div>
+                      )
+                    })
+                  }
                 </div>
-                <div className={styles.spot_tab}>
-                  自定义热点
-                </div>
-              </div>
+              </Row>
             </Collapse.Panel>
           </Collapse>
         </Form>

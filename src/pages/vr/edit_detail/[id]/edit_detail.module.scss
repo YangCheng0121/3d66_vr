@@ -174,15 +174,32 @@
 
 .spot_tabs {
   display: flex;
+
   .spot_tab {
-    border-color: #4E5969;
+    padding: 6px 16px;
     text-align: center;
     font-size: 12px;
     color: #86909C;
     background: #252830;
+    border: 1px solid #4E5969;
+    cursor: pointer;
+    transition: all .3s;
 
-    &.active {
-      border: 1px solid #F8BC25;
+    &:hover {
+      color: #f8bc25;
+    }
+
+    &:first-child {
+      border-radius: 6px 0 0 6px;
+      border-right-color: transparent;
+    }
+
+    &:last-child {
+      border-radius: 0 6px 6px 0;
+    }
+
+    &__active {
+      border-color: #F8BC25 !important;
       background: #252830;
       color: #F8BC25;
     }
