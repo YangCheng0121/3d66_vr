@@ -1,10 +1,10 @@
-import {Drawer, Row, Col, Typography, Collapse, Radio, Space, Form, Input} from "antd";
+import {Drawer, Row, Col, Typography, Collapse, Radio, Space, Form, Input, Dropdown, MenuProps} from "antd";
 import React, {useState} from "react";
 import {CloseOutlined} from "@ant-design/icons";
 import Center from "@/common/Center";
 import InputNumberLimit from '@/common/InputNumberLimit'
 
-import {RollbackOutlined, CaretDownFilled} from '@ant-design/icons';
+import {RollbackOutlined, CaretDownFilled, SearchOutlined} from '@ant-design/icons';
 import styles from '../edit_detail.module.scss'
 
 const AddSpot = (props: any) => {
@@ -15,6 +15,41 @@ const AddSpot = (props: any) => {
   const [tab, setTab] = useState('system')
   const [style, setStyle] = useState(null)
   let mySpotTimer: any
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+          1st menu item
+        </a>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+          2nd menu item (disabled)
+        </a>
+      ),
+      disabled: true,
+    },
+    {
+      key: '3',
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
+          3rd menu item (disabled)
+        </a>
+      ),
+      disabled: true,
+    },
+    {
+      key: '4',
+      danger: true,
+      label: 'a danger item',
+    },
+  ];
+
 
   return (
     <>
@@ -154,6 +189,32 @@ const AddSpot = (props: any) => {
                     src="https://static.3d66.com/vr/js/krpano/skin/hotspot/hotspot_1.png" alt=""/>
                 </div>
               </div>
+            </Collapse.Panel>
+            <Collapse.Panel
+              style={{border: 'none'}}
+              header={
+                <Row>
+                  <Col flex={2}>
+                    <Space>
+                      <Typography.Title style={{color: '#fff'}} level={5}>选择关联场景</Typography.Title>
+                      <SearchOutlined/>
+                    </Space>
+                  </Col>
+                  <Col flex={1}>
+                    <Dropdown menu={{ items }}>
+                      <a onClick={(e) => e.preventDefault()}>
+                        <Space>
+                          Hover me
+                        </Space>
+                      </a>
+                    </Dropdown>
+                  </Col>
+                </Row>
+              }
+              key="4">
+              <Form.Item className={styles.spot_formItem}>
+                <Input className={styles.spot_input} placeholder="输入场景名称进行查找"></Input>
+              </Form.Item>
             </Collapse.Panel>
           </Collapse>
         </Form>
