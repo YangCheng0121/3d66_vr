@@ -1,10 +1,10 @@
 import React, {useEffect, useMemo, useState} from "react";
 import {Row, Space, Typography, Col, Drawer, Button, ConfigProvider, Dropdown, MenuProps, List, Avatar} from "antd";
 import {CloseOutlined, RightOutlined} from "@ant-design/icons";
-import styles from '../edit_detail.module.scss'
+import styles from './spot.module.scss'
 import Padding from "@/common/Padding";
 import IconFont from "@/common/IconFont";
-import AddSpot from "@/pages/vr/edit_detail/[id]/components/AddSpot";
+import AddSpot from "./AddSpot";
 
 const COLOR_PRIMARY_TEXT = '#1D2129'
 const COLOR_Typography_TEXT = '#86909C'
@@ -36,8 +36,7 @@ const HotSpotList = (props: any) => {
         trigger={['hover']}
         onOpenChange={(open) => {
           setRotate(open ? 90 : 0)
-        }
-        }
+        }}
         menu={{
           items,
           selectable: true,

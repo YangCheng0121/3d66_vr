@@ -5,7 +5,8 @@ import Center from "@/common/Center";
 import InputNumberLimit from '@/common/InputNumberLimit'
 
 import {RollbackOutlined, CaretDownFilled, SearchOutlined} from '@ant-design/icons';
-import styles from '../edit_detail.module.scss'
+import styles from './spot.module.scss'
+import Cursor from "@/common/Cursor";
 
 const AddSpot = (props: any) => {
   const {children} = props
@@ -50,7 +51,6 @@ const AddSpot = (props: any) => {
     },
   ];
 
-
   return (
     <>
       {React.cloneElement(children, {
@@ -94,17 +94,17 @@ const AddSpot = (props: any) => {
         <Form>
           <Collapse
             bordered={false}
-            defaultActiveKey={['1', '2', '3']}
+            defaultActiveKey={['Type', 'Name', 'Style', 'Scenes']}
             expandIcon={({isActive}) =>
               <CaretDownFilled style={{color: isActive ? '#F8BC25' : '#C9CDD4'}}
                                rotate={isActive ? 0 : -90}/>}
           >
             <Collapse.Panel
+              key="Type"
               style={{border: 'none'}}
               header={
                 <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
-              }
-              key="1">
+              }>
               <Form.Item rootClassName={styles.spot_formItem}>
                 <Radio.Group
                   onChange={(e) => setType(e.target.value)}
@@ -122,7 +122,7 @@ const AddSpot = (props: any) => {
                       ].map((item) => {
                         return (
                           <Radio.Button
-                            className={type !== item.value ? styles.spot_type : styles.spot_type_active}
+                            className={type !== item.value ? styles.spot_type : styles.spot_type__active}
                             value={item.value}
                             key={item.value}>
                             {item.label}
@@ -135,18 +135,20 @@ const AddSpot = (props: any) => {
               </Form.Item>
             </Collapse.Panel>
             <Collapse.Panel
+              key="Type"
               style={{border: 'none'}}
               header={
                 <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
-              } key="2">
+              }>
               <Form.Item className={styles.spot_formItem}>
                 <InputNumberLimit className={styles.spot_input} numberStyle={{color: '#86909C'}} maxLength={50}
                                   placeholder="请输入热点名称(非必填)"/>
               </Form.Item>
             </Collapse.Panel>
-            <Collapse.Panel style={{border: 'none'}}
-                            header={<Typography.Title style={{color: '#fff'}} level={5}>样式</Typography.Title>}
-                            key="3">
+            <Collapse.Panel
+              key="Style"
+              style={{border: 'none'}}
+              header={<Typography.Title style={{color: '#fff'}} level={5}>样式</Typography.Title>}>
               <Row justify="center">
                 <div className={styles.spot_tabs}>
                   {
@@ -191,29 +193,36 @@ const AddSpot = (props: any) => {
               </div>
             </Collapse.Panel>
             <Collapse.Panel
+              key="Scenes"
               style={{border: 'none'}}
               header={
                 <Row>
                   <Col flex={2}>
-                    <Space>
+                    <Space align="baseline">
                       <Typography.Title style={{color: '#fff'}} level={5}>选择关联场景</Typography.Title>
-                      <SearchOutlined/>
+                      <SearchOutlined style={{fontSize: '16px', color: '#fff'}}/>
                     </Space>
                   </Col>
                   <Col flex={1}>
-                    <Dropdown menu={{ items }}>
-                      <a onClick={(e) => e.preventDefault()}>
-                        <Space>
-                          Hover me
-                        </Space>
-                      </a>
+                    <Dropdown menu={{items}}>
+                      <Cursor onClick={(e: any) => e.preventDefault()}>
+                        <Typography style={{color:'#fff'}}>全部</Typography>
+                      </Cursor>
                     </Dropdown>
                   </Col>
                 </Row>
               }
-              key="4">
+            >
               <Form.Item className={styles.spot_formItem}>
                 <Input className={styles.spot_input} placeholder="输入场景名称进行查找"></Input>
+                <div className={styles.spot_scenesList}>
+                  <ul>
+                    <li className={styles.spot_scenes}>
+                      <img className={styles.spot_img}/>
+                      <p className={styles.spot_name}></p>
+                    </li>
+                  </ul>
+                </div>
               </Form.Item>
             </Collapse.Panel>
           </Collapse>
