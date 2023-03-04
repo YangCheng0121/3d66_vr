@@ -7,7 +7,6 @@ import InputNumberLimit from '@/common/InputNumberLimit'
 import {RollbackOutlined, CaretDownFilled, SearchOutlined} from '@ant-design/icons';
 import styles from './spot.module.scss'
 import Cursor from "@/common/Cursor";
-
 const AddSpot = (props: any) => {
   const {children} = props
   const [open, setOpen] = useState(false)
@@ -227,7 +226,6 @@ const AddSpot = (props: any) => {
             </Collapse.Panel>
           </Collapse>
         </Form>
-
       </Drawer>
     </>
   )

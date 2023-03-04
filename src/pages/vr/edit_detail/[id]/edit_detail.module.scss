@@ -27,6 +27,11 @@
     &:hover {
       background: #19b955;
     }
+
+    &:active {
+      background: #19b955;
+      opacity: 0.6;
+    }
   }
 }
 
@@ -116,25 +121,6 @@
     padding: 0;
     border: 0;
     border-radius: 2px;
-  }
-}
-
-.drown {
-  padding: 10px 0;
-  width: 120px;
-  background: #1D2129;
-  border-radius: 6px;
-
-  &_item {
-    padding: 0 16px;
-    height: 26px;
-    line-height: 26px;
-    font-size: 14px;
-    color: #C9CDD4;
-
-    &:hover {
-      background: #4E5969;
-    }
   }
 }
 

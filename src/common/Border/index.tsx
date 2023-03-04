@@ -54,10 +54,6 @@ const border = (props: Iprops) => {
 
         {...other}
     >
-        {/* {borderClass.map((item: any, index: number) => {
-            return <div key={index} className={item}></div>
-        })} */}
-
         {props.children}
 
     </div> : <ContentResult></ContentResult>
