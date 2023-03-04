@@ -7,6 +7,7 @@ import InputNumberLimit from '@/common/InputNumberLimit'
 import {RollbackOutlined, CaretDownFilled, SearchOutlined} from '@ant-design/icons';
 import styles from './spot.module.scss'
 import Cursor from "@/common/Cursor";
+
 const AddSpot = (props: any) => {
   const {children} = props
   const [open, setOpen] = useState(false)
@@ -133,10 +134,10 @@ const AddSpot = (props: any) => {
               </Form.Item>
             </Collapse.Panel>
             <Collapse.Panel
-              key="Type"
+              key="Name"
               style={{border: 'none'}}
               header={
-                <Typography.Title style={{color: '#fff'}} level={5}>类型</Typography.Title>
+                <Typography.Title style={{color: '#fff'}} level={5}>名称</Typography.Title>
               }>
               <Form.Item className={styles.spot_formItem}>
                 <InputNumberLimit className={styles.spot_input} numberStyle={{color: '#86909C'}} maxLength={50}
@@ -204,7 +205,7 @@ const AddSpot = (props: any) => {
                   <Col flex={1}>
                     <Dropdown menu={{items}}>
                       <Cursor onClick={(e: any) => e.preventDefault()}>
-                        <Typography style={{color:'#fff'}}>全部</Typography>
+                        <Typography style={{color: '#fff'}}>全部</Typography>
                       </Cursor>
                     </Dropdown>
                   </Col>
