@@ -107,7 +107,6 @@ const AddSpot = (props: any) => {
               <Form.Item rootClassName={styles.spot_formItem}>
                 <Radio.Group
                   onChange={(e) => setType(e.target.value)}
-                  defaultValue="a"
                   buttonStyle="solid"
                   size="small">
                   <Space>
