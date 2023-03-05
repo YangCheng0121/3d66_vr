@@ -215,10 +215,18 @@ const AddSpot = (props: any) => {
               <Form.Item className={styles.spot_formItem}>
                 <Input className={styles.spot_input} placeholder="输入场景名称进行查找"></Input>
                 <div className={styles.spot_scenesList}>
+                  <div className={styles.spot_addScenes}>
+
+                  </div>
                   <ul>
                     <li className={styles.spot_scenes}>
-                      <img className={styles.spot_img}/>
-                      <p className={styles.spot_name}></p>
+                      <img className={styles.spot_img}
+                           src="https://vrimg.3d66.com/vr/thumb/20230214/5539612/thumb.jpg"
+                           alt=""
+                      />
+                      <p className={styles.spot_name}>
+                        场景名称
+                      </p>
                     </li>
                   </ul>
                 </div>
