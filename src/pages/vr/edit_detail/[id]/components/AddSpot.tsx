@@ -70,6 +70,7 @@ const AddSpot = (props: any) => {
         headerStyle={{
           borderBottom: '1px solid #4E5969'
         }}
+        width={390}
         title={
           <Row>
             <Col flex={1}>
@@ -218,7 +219,7 @@ const AddSpot = (props: any) => {
                   <div className={styles.spot_addScenes}>
 
                   </div>
-                  <ul>
+                  <ul className={styles.spot_scenesList}>
                     <li className={styles.spot_scenes}>
                       <img className={styles.spot_img}
                            src="https://vrimg.3d66.com/vr/thumb/20230214/5539612/thumb.jpg"

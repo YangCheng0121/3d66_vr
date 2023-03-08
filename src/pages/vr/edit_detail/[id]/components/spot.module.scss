@@ -1,3 +1,4 @@
+
 .spot_formItem {
   margin-bottom: 0;
 }
@@ -71,6 +72,26 @@
     .spot_styleImg {
       margin-top: 0;
       width: 100%;
+    }
+  }
+}
+
+.spot_scenesList {
+  list-style: none;
+
+  .spot_scenes {
+    width: 140px;
+    height: 140px;
+    border: 1px solid transparent;
+    transition: all .3s;
+
+    &.active {
+      border-color: #F8BC25;
+    }
+
+    .spot_img {
+      width: 100%;
+      height: 100%;
     }
   }
 }
