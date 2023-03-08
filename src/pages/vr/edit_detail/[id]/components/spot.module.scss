@@ -84,6 +84,7 @@
     height: 140px;
     border: 1px solid transparent;
     transition: all .3s;
+    border-radius: 6px;
 
     &.active {
       border-color: #F8BC25;
@@ -92,6 +93,20 @@
     .spot_img {
       width: 100%;
       height: 100%;
+      border-radius: inherit;
+    }
+
+    .spot_name {
+      margin: 0 auto;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100px;
+      padding: 8px 0;
+      line-height: 22px;
+      text-align: center;
+      font-size: 14px;
+      color: #86909C;
     }
   }
 }
