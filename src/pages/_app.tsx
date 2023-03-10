@@ -1,22 +1,28 @@
 import '@/styles/globals.scss'
 import '@/styles/normalize.scss'
-import type { AppProps } from 'next/app'
-import { ConfigProvider } from 'antd';
+import type {AppProps} from 'next/app'
+import {ConfigProvider} from 'antd';
 
 type ThemeData = {
   borderRadius: number;
   colorPrimary: string;
 };
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({Component, pageProps}: AppProps) {
   const defaultData: ThemeData = {
     borderRadius: 6,
-    colorPrimary: '#19b955',
+    colorPrimary: '#3F4A69',
   };
 
-  return(
+  return (
     <ConfigProvider
-      theme={{ token: { colorPrimary: defaultData.colorPrimary, borderRadius: defaultData.borderRadius } }}
+      theme={{
+        token: {
+          colorPrimary: defaultData.colorPrimary,
+          borderRadius: defaultData.borderRadius,
+          boxShadow: defaultData.colorPrimary,
+        }
+      }}
     >
       <Component {...pageProps} />
     </ConfigProvider>
