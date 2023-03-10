@@ -20,8 +20,7 @@ export default function App({Component, pageProps}: AppProps) {
         token: {
           colorPrimary: defaultData.colorPrimary,
           borderRadius: defaultData.borderRadius,
-          boxShadow: defaultData.colorPrimary,
-        }
+        },
       }}
     >
       <Component {...pageProps} />
