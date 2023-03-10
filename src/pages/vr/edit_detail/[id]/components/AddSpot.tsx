@@ -207,7 +207,7 @@ const AddSpot = (props: any) => {
                     </Col>
                     <Col flex={1}>
                       <Dropdown menu={{items}}>
-                        <Cursor onClick={(e: any) => e.preventDefault()}>
+                        <Cursor onClick={(e: any) => e.stopPropagation()}>
                           <Typography style={{color: '#fff'}}>全部</Typography>
                         </Cursor>
                       </Dropdown>

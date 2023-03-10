@@ -1,5 +1,18 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {Row, Space, Typography, Col, Drawer, Button, ConfigProvider, Dropdown, MenuProps, List, Avatar} from "antd";
+import {
+  Row,
+  Space,
+  Typography,
+  Col,
+  Drawer,
+  Popover,
+  Button,
+  ConfigProvider,
+  Dropdown,
+  MenuProps,
+  List,
+  Avatar
+} from "antd";
 import {CloseOutlined, RightOutlined} from "@ant-design/icons";
 import styles from './spot.module.scss'
 import Padding from "@/common/Padding";
@@ -16,33 +29,17 @@ const HotSpotList = (props: any) => {
   const AllDrown = () => {
     const [rotate, setRotate] = useState(0)
 
-    const items: MenuProps['items'] = [
-      {
-        key: '1',
-        label: 'Item 1',
-      },
-      {
-        key: '2',
-        label: 'Item 2',
-      },
-      {
-        key: '3',
-        label: 'Item 3',
-      },
-    ];
+    const content = () =>{
+      return (
+        <div>
+          <p>Content</p>
+          <p>Content</p>
+        </div>
+      )
+    }
 
     return (
-      <Dropdown
-        trigger={['hover']}
-        onOpenChange={(open) => {
-          setRotate(open ? 90 : 0)
-        }}
-        menu={{
-          items,
-          selectable: true,
-          defaultSelectedKeys: ['3'],
-        }}
-      >
+      <Popover content={content}>
         <a>
           <Typography.Text style={{color: COLOR_Typography_TEXT}}>
             全部热点
@@ -51,7 +48,22 @@ const HotSpotList = (props: any) => {
             />
           </Typography.Text>
         </a>
-      </Dropdown>
+      </Popover>
+
+
+      // <Dropdown
+      //   trigger={['hover']}
+      //   onOpenChange={(open) => {
+      //     setRotate(open ? 90 : 0)
+      //   }}
+      //   menu={{
+      //     items,
+      //     selectable: true,
+      //     defaultSelectedKeys: ['3'],
+      //   }}
+      // >
+      //
+      // </Dropdown>
     )
   }
 
