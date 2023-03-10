@@ -1,4 +1,4 @@
-import {Modal, Button, Typography} from 'antd';
+import {Modal, Button, Typography, Space, Row} from 'antd';
 import React, {useState} from 'react';
 import styles from './scenes.module.scss'
 
@@ -25,7 +25,24 @@ const ScenesEdit = (props: any) => {
 
   const Group = () => {
     return (
-      <Typography style={{fontWeight: 'bold'}}>分组管理</Typography>
+      <div>
+        <Typography style={{fontWeight: 'bold'}}>分组管理 2/10</Typography>
+        <ul className={styles.groupList}>
+          <li className={styles.groupList_item}>
+            分组1
+          </li>
+          <li className={styles.groupList_item}>
+            分组2
+          </li>
+        </ul>
+      </div>
+    )
+  }
+
+  const ScenesList =() =>{
+    return (
+      <>
+      </>
     )
   }
 
@@ -61,7 +78,10 @@ const ScenesEdit = (props: any) => {
           </Button>,
         ]}
       >
-        <Group></Group>
+        <Row>
+          <Group></Group>
+          <ScenesList></ScenesList>
+        </Row>
       </Modal>
     </>
   )
