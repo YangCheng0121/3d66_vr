@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Form, Input, Space, Tag, Typography} from 'antd';
 import Modal from '@/common/Modal'
 import HotSpotList from "./components/HotSpotList";
+import ScenesEdit from '@/pages/vr/edit_detail/[id]/components/ScenesEdit';
 
 const {CheckableTag} = Tag;
 const {TextArea} = Input;
@@ -118,7 +119,12 @@ const RightBar = () => {
             <span className={styles.right_bar_label}>作品信息</span>
           </li>
         </WorkInformation>
-        <HotSpotList >
+        <ScenesEdit>
+          <li className={styles.right_bar_item}>
+            <span className={styles.right_bar_label}>场景编辑</span>
+          </li>
+        </ScenesEdit>
+        <HotSpotList>
           <li className={styles.right_bar_item}>
             <span className={styles.right_bar_label}>热点</span>
           </li>
