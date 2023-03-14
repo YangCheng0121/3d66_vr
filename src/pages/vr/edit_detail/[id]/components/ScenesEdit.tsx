@@ -1,4 +1,4 @@
-import {Modal, Button, Typography, Space, Row} from 'antd';
+import {Modal, Button, Typography, Row, Col} from 'antd';
 import React, {useState} from 'react';
 import styles from './scenes.module.scss'
 
@@ -41,8 +41,8 @@ const ScenesEdit = (props: any) => {
 
   const ScenesList =() =>{
     return (
-      <>
-      </>
+      <div className={styles.scenesList}>
+      </div>
     )
   }
 
@@ -79,8 +79,12 @@ const ScenesEdit = (props: any) => {
         ]}
       >
         <Row>
-          <Group></Group>
-          <ScenesList></ScenesList>
+          <Col flex="240px">
+            <Group></Group>
+          </Col>
+          <Col flex={1}>
+            <ScenesList></ScenesList>
+          </Col>
         </Row>
       </Modal>
     </>
